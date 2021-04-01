@@ -429,9 +429,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2171349348328260882, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
     - target: {fileID: 88136424461387171, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: missileEffect
+      value: 
+      objectReference: {fileID: 2669046028982602138, guid: 60a56da6d57c2b642bad159044307a8c, type: 3}
+    - target: {fileID: 88136424461387171, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: missileBulletPos
+      value: 
+      objectReference: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+    - target: {fileID: 88136424461387171, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
       propertyPath: assaultRifleBullet
       value: 
-      objectReference: {fileID: 7184101461804147885, guid: fb0278cceba5de845af28051cd41c4a6, type: 3}
+      objectReference: {fileID: 2537490988925993131, guid: fb0278cceba5de845af28051cd41c4a6, type: 3}
     - target: {fileID: 3434503640619520753, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
       propertyPath: m_Name
       value: Soldier
@@ -482,3 +490,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+--- !u!1001 &1007012720546253347
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804082928449867872, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809522360491476918, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
+      propertyPath: m_Name
+      value: Missile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9a9c10239c13c104f970c902a7872d77, type: 3}
