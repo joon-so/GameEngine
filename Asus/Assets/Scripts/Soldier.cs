@@ -22,11 +22,8 @@ public class Soldier : MonoBehaviour
     [SerializeField] GameObject Grenade = null;
 
     public float moveSpeed = 5.0f;
-
     public float fireCoolTime = 0.5f;
-
     public float followDistance = 5.0f;
-
     public float dodgeCoolTime = 3.0f;
     float curDodgeCoolTime = 0;
 
@@ -179,21 +176,6 @@ public class Soldier : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.A))
         {
             attackRange.SetActive(false);
-        }
-    }
-    void Missile()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        if (Physics.Raycast(ray, out rayHit, 100))
-        {
-            Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 2;
-            transform.LookAt(transform.position + nextVec);
-
-            GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
-            Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
-            rigidMissile.velocity = missileBulletPos.forward * 50;
         }
     }
 
