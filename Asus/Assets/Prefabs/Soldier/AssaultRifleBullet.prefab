@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2352351641298676589}
-  - component: {fileID: 2395723669952822921}
+  - component: {fileID: -2496530724905190725}
   - component: {fileID: 2479630044705611183}
   - component: {fileID: 2480073267049657099}
   - component: {fileID: 2324913736394697255}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2354266376056986323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.65, y: 2, z: -0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2352019520016979685}
@@ -37,7 +37,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2395723669952822921
+--- !u!114 &-2496530724905190725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,20 +46,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2354266376056986323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
+  m_Script: {fileID: 11500000, guid: a9e0d8259ef31f94bb7c2b2f9b1b872a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
   speed: 60
   accuracy: 95
   fireRate: 5
   muzzlePrefab: {fileID: 1357030889595668, guid: 31d15199ffdbd87468857df8492d57ae, type: 3}
   hitPrefab: {fileID: 1801918589960200, guid: 03280e26db9a2524c8409f02a2ab4d7d, type: 3}
-  trails:
-  - {fileID: 2354469808246751105}
+  trails: []
+  damage: 0
 --- !u!199 &2479630044705611183
 ParticleSystemRenderer:
   serializedVersion: 6
