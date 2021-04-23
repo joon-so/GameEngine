@@ -31,7 +31,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Tag()
+    public void Tag1()
     {
+        character1.gameObject.tag = "SubCharacter";
+        character2.gameObject.tag = "MainCharacter";
+        character1.gameObject.layer = 7;
+        character2.gameObject.layer = 6;
+    }
+    public void Tag2()
+    {
+        character1.gameObject.tag = "MainCharacter";
+        character2.gameObject.tag = "SubCharacter";
+        character1.gameObject.layer = 6;
+        character2.gameObject.layer = 7;
     }
 }

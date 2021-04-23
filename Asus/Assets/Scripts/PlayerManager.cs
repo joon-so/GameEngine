@@ -15,11 +15,13 @@ public class PlayerManager : MonoBehaviour
     {
         mainCameraController = focusCharacter.GetComponent<CameraController>();
         isTag = true;
+
+        InitCharacter();
     }
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             Tag();
         }
@@ -30,22 +32,25 @@ public class PlayerManager : MonoBehaviour
     {
         GameManager.instance.character1 = mainCharacter;
         GameManager.instance.character2 = subCharacter;
-    }
 
+        GameManager.instance.mainPlayerHp = 500;
+        GameManager.instance.mainPlayerEp = 150;
+        GameManager.instance.subPlayerHp = 400;
+        GameManager.instance.subPlayerEp = 200;
+    }
 
     void Tag()
     {
         if(isTag)
         {
             mainCameraController.focus = subCharacter.transform;
-
-
+            GameManager.instance.Tag1();
             isTag = false;
         }
         else
         {
             mainCameraController.focus = mainCharacter.transform;
-
+            GameManager.instance.Tag2();
             isTag = true;
         }
     }

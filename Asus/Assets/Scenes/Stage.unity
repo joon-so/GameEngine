@@ -374,7 +374,7 @@ MonoBehaviour:
   distance: 30.6
   focusRadius: 1
   focusCentering: 0.5
-  focus: {fileID: 509897530}
+  focus: {fileID: 0}
 --- !u!1 &703699660
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +471,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &854410980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854410982}
+  - component: {fileID: 854410981}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854410981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854410980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84f6d4dcc56a664ba8a7ecd3c1d45e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character1: {fileID: 0}
+  character2: {fileID: 0}
+  mainPlayerMaxHp: 0
+  mainPlayerMaxEp: 0
+  subPlayerMaxHp: 0
+  subPlayerMaxEp: 0
+  mainPlayerHp: 0
+  mainPlayerEp: 0
+  subPlayerHp: 0
+  subPlayerEp: 0
+--- !u!4 &854410982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854410980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.724785, y: 4.3222375, z: 3.8822317}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1351528424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,7 +549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198530307444561397, guid: e41a6887958c93649903f467ecc80545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 198530307444561397, guid: e41a6887958c93649903f467ecc80545, type: 3}
       propertyPath: m_LocalPosition.y
