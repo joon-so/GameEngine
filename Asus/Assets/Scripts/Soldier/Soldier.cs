@@ -22,23 +22,31 @@ public class Soldier : MonoBehaviour
     [SerializeField] GameObject Grenade = null;
 
     public float moveSpeed = 5.0f;
+
     public float fireCoolTime = 0.5f;
+
     public float followDistance = 5.0f;
+
     public float dodgeCoolTime = 3.0f;
     float curDodgeCoolTime = 0;
 
-    // 스킬
-    public float qskillCoolTime = 5.0f;
+    public float qskillCoolTime = 7.0f;
     float curQSkillCoolTime = 0;
-    bool onQSkill;
+    public float wskillCoolTime = 4.0f;
+    float curWSkillCoolTime = 0;
 
-    bool onAttack;
     bool onDodge;
-    bool endDodge;
+    bool onQSkill;
+    bool onWSkill;
+
+    bool canMove;
+    bool canAttack;
+    bool canDodge;
+    bool canSkill;
+
+    bool doingDodge;
 
     Vector3 vecTarget;
-
-    bool onFire;
 
     float fireDelay;
 
@@ -55,44 +63,57 @@ public class Soldier : MonoBehaviour
     {
         vecTarget = transform.position;
         onDodge = true;
-        endDodge = true;
-        onAttack = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+
+        doingDodge = false;
 
         curDodgeCoolTime = dodgeCoolTime;
-        StartCoroutine("DrawAssaultRifle");
-        StartCoroutine("DrawAssaultRifle");
-
-
-        // 스킬
-        onQSkill = true;
+        StartCoroutine(DrawAssaultRifle());
     }
+
     void Update()
     {
         if (gameObject.transform.tag == "MainCharacter")
         {
-            if (endDodge)
-            {
+            fireDelay += Time.deltaTime;
+            if (canMove)
                 Move();
-                Stop();
-                if (onAttack)
-                {
-                    Attack();
-                }
+            if (canAttack)
+                Attack();
+            if (canDodge)
+                Dodge();
+            if (doingDodge)
+            {
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                vecTarget = transform.position;
             }
-            Dodge();
+
+            if (canSkill)
+            {
+                Q_Skill();
+                W_Skill();
+                E_Skill();
+            }
+            Stop();
             AttackRange();
             CoolTime();
+        }
+        else if (gameObject.transform.tag == "SubCharacter")
+        {
 
-            Q_Skill();
-            W_Skill();
-            E_Skill();
         }
     }
     void Move()
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5;
+            moveSpeed = 5.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -119,29 +140,19 @@ public class Soldier : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && onDodge)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            curDodgeCoolTime = 0.0f;
-
-            moveSpeed = 10;
-            anim.SetTrigger("Dodge");
-
-            onDodge = false;
-        }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
-        {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            vecTarget = transform.position;
-            endDodge = false;
+            StartCoroutine(dodge());
         }
     }
     void Attack()
     {
-        fireDelay += Time.deltaTime;
-        //onFire = weapon.shotSpeed < fireDelay;
-
         if (Input.GetMouseButtonDown(0))
         {
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
             if (fireDelay > fireCoolTime)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -155,7 +166,7 @@ public class Soldier : MonoBehaviour
 
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = assaultRifleBulletPos.forward * 80.0f;
+                bulletRigid.velocity = assaultRifleBulletPos.forward;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -163,6 +174,8 @@ public class Soldier : MonoBehaviour
 
                 anim.SetTrigger("shootAssaultRifle");
                 fireDelay = 0;
+
+                StartCoroutine(AttackDelay());
             }
         }
     }
@@ -178,7 +191,6 @@ public class Soldier : MonoBehaviour
             attackRange.SetActive(false);
         }
     }
-
     void CoolTime()
     {
         // 회피
@@ -188,9 +200,9 @@ public class Soldier : MonoBehaviour
         }
         else
         {
+            canDodge = true;
             onDodge = true;
         }
-
         // Q스킬
         if (curQSkillCoolTime < qskillCoolTime)
         {
@@ -200,60 +212,46 @@ public class Soldier : MonoBehaviour
         {
             onQSkill = true;
         }
+        // W스킬
+        if (curWSkillCoolTime < wskillCoolTime)
+        {
+            curWSkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onWSkill = true;
+        }
     }
     void Q_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            onQSkill = false;
+            curQSkillCoolTime = 0;
             anim.SetBool("Run", false);
-            if (onQSkill)
-            {
-                //onAttack = false;
-                // 버튼을 누르면 범위 표시
-                //attackRange.SetActive(true);
-                //missileRange.SetActive(true);
 
-                //missileRange.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
 
-                // 만약 클릭하면
-
-
-                onQSkill = false;
-                curQSkillCoolTime = 0;
-                // 스킬 사용
-                StartCoroutine(ShootMissile());
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-
-            attackRange.SetActive(false);
+            StartCoroutine(ShootMissile());
         }
     }
     void W_Skill()
     {
-        // 수류탄
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
             anim.SetBool("Run", false);
-            vecTarget = transform.position;
 
-            anim.SetTrigger("shootGrenade");
-            // 클릭?
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit rayHit;
-            if (Physics.Raycast(ray, out rayHit, 100))
-            {
-                Vector3 nextVec = rayHit.point - transform.position;
-                nextVec.y = 2;
-                transform.LookAt(transform.position + nextVec);
-
-                GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
-                Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-                rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
-                rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-            }
+            StartCoroutine(ShootGrenade());
         }
     }
     void E_Skill()
@@ -264,28 +262,50 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+    IEnumerator dodge()
+    {
+        //0.9sec
+        curDodgeCoolTime = 0.0f;
+        anim.SetTrigger("Dodge");
+        canMove = false;
+        canAttack = false;
+        canSkill = false;
+        doingDodge = true;
+        moveSpeed = 10.0f;
+        yield return new WaitForSeconds(0.6f);
+        moveSpeed = 3.0f;
+        yield return new WaitForSeconds(0.25f);
+        moveSpeed = 5.0f;
+        canMove = true;
+        canAttack = true;
+        canSkill = true;
+        doingDodge = false;
+    }
+    IEnumerator DodgeDelay()
+    {
+        yield return new WaitForSeconds(0.9f);
+        canAttack = true;
+        canMove = true;
+        canSkill = true;
+    }
     IEnumerator DrawAssaultRifle()
     {
-        anim.SetTrigger("Idle");
         yield return new WaitForSeconds(0.5f);
         anim.SetTrigger("drawAssaultRifle");
         yield return new WaitForSeconds(0.5f);
         backAssaultRifle.SetActive(false);
         useAssaultRifle.SetActive(true);
-    }
-    IEnumerator ChangeRifleToMissile()
-    {
-        anim.SetTrigger("drawMissileLauncher");
-        yield return new WaitForSeconds(0.5f);
-        useAssaultRifle.SetActive(false);
-        useMissileLauncher.SetActive(true);
-    }
-    IEnumerator ChangeMissileToRifle()
-    {
-        anim.SetTrigger("drawAssaultRifle");
-        yield return new WaitForSeconds(0.5f);
-        useMissileLauncher.SetActive(false);
-        useAssaultRifle.SetActive(true);
+        canMove = true;
+        canAttack = true;
+        canDodge = true;
+        canSkill = true;
     }
     IEnumerator ShootMissile()
     {
@@ -293,10 +313,10 @@ public class Soldier : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
-        if (Physics.Raycast(ray, out rayHit, 100))
+        if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 2;
+            nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
             // 미사일 장착
@@ -315,8 +335,8 @@ public class Soldier : MonoBehaviour
 
             anim.SetTrigger("shootMissileLauncher");
             GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
-            Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
-            rigidMissile.velocity = missileBulletPos.forward * 50;
+            Rigidbody missileRigid = instantMissile.GetComponent<Rigidbody>();
+            missileRigid.velocity = missileBulletPos.forward * 100;
 
             yield return new WaitForSeconds(1.0f);
 
@@ -325,16 +345,45 @@ public class Soldier : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             useMissileLauncher.SetActive(false);
             useAssaultRifle.SetActive(true);
-            onAttack = true;
+
+            yield return new WaitForSeconds(0.3f);
+            canAttack = true;
+            canMove = true;
+            canDodge = true;
+            canSkill = true;
         }
     }
     IEnumerator ShootGrenade()
     {
+        vecTarget = transform.position;
         anim.SetTrigger("shootGrenade");
-        yield return new WaitForSeconds(3.0f);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            if (Vector3.Distance(nextVec, transform.position) > 80.0f)
+                nextVec = nextVec.normalized * 80.0f;
+
+            Debug.Log(nextVec);
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+
+            GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
+            Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+            rigidGrenade.AddForce(nextVec * 0.5f, ForceMode.Impulse);
+            rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 
-
-
-    // 태그시 초기화할 것들을 생각해보자 ex) 플레이어 이동속도, 클릭했던 좌표 등
+    void OnCollisionEnter(Collision collision)
+    {
+    }
 }
