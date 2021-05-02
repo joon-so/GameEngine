@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifleBullet : MonoBehaviour
+public class MissileBullet : MonoBehaviour
 {
     public float speed;
     [Tooltip("From 0% to 100%")]
@@ -19,14 +19,13 @@ public class AssaultRifleBullet : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public int damage = 50;
+    public int damage = 100;
 
     void Start()
     {
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 
-        //used to create a radius for the accuracy and have a very unique randomness
         if (accuracy != 100)
         {
             accuracy = 1 - (accuracy / 100);
@@ -66,7 +65,6 @@ public class AssaultRifleBullet : MonoBehaviour
             }
         }
     }
-
     void FixedUpdate()
     {
         if (target != null)
@@ -75,7 +73,7 @@ public class AssaultRifleBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 20.0f)
+        if (Vector3.Distance(startPos, transform.position) > 100.0f)
             Destroy(gameObject);
     }
 

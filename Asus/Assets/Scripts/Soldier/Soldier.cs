@@ -140,7 +140,7 @@ public class Soldier : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
             StartCoroutine(dodge());
         }
@@ -200,7 +200,6 @@ public class Soldier : MonoBehaviour
         }
         else
         {
-            canDodge = true;
             onDodge = true;
         }
         // Q½ºÅ³
@@ -272,11 +271,13 @@ public class Soldier : MonoBehaviour
     IEnumerator dodge()
     {
         //0.9sec
-        curDodgeCoolTime = 0.0f;
-        anim.SetTrigger("Dodge");
         canMove = false;
         canAttack = false;
         canSkill = false;
+        onDodge = false;
+
+        curDodgeCoolTime = 0.0f;
+        anim.SetTrigger("Dodge");
         doingDodge = true;
         moveSpeed = 10.0f;
         yield return new WaitForSeconds(0.6f);
