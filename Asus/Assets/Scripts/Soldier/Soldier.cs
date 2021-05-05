@@ -289,13 +289,6 @@ public class Soldier : MonoBehaviour
         canSkill = true;
         doingDodge = false;
     }
-    IEnumerator DodgeDelay()
-    {
-        yield return new WaitForSeconds(0.9f);
-        canAttack = true;
-        canMove = true;
-        canSkill = true;
-    }
     IEnumerator DrawAssaultRifle()
     {
         yield return new WaitForSeconds(0.5f);
@@ -320,13 +313,11 @@ public class Soldier : MonoBehaviour
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
-            // 미사일 장착
             anim.SetTrigger("drawMissileLauncher");
             yield return new WaitForSeconds(0.5f);
             useAssaultRifle.SetActive(false);
             useMissileLauncher.SetActive(true);
 
-            // 기모으기
             anim.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
@@ -341,7 +332,6 @@ public class Soldier : MonoBehaviour
 
             yield return new WaitForSeconds(1.0f);
 
-            // 라이플 장착
             anim.SetTrigger("drawAssaultRifle");
             yield return new WaitForSeconds(0.5f);
             useMissileLauncher.SetActive(false);
@@ -364,16 +354,14 @@ public class Soldier : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            if (Vector3.Distance(nextVec, transform.position) > 80.0f)
-                nextVec = nextVec.normalized * 80.0f;
+            if (Vector3.Distance(nextVec, transform.position) > 15)
+                nextVec = nextVec.normalized * 15;
 
-            Debug.Log(nextVec);
-            nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
-
+            nextVec.y = 5;
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-            rigidGrenade.AddForce(nextVec * 0.5f, ForceMode.Impulse);
+            rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
             rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
         }
 
