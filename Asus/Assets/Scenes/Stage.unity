@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &48130478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4652384506784415910, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+  m_PrefabInstance: {fileID: 1354365475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &98524495
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +270,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &321128885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1822637517937281002, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+  m_PrefabInstance: {fileID: 1354365475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &509897530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4652384506293391849, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
@@ -374,7 +384,7 @@ MonoBehaviour:
   distance: 30.6
   focusRadius: 1
   focusCentering: 0.5
-  focus: {fileID: 0}
+  focus: {fileID: 1351528425}
 --- !u!1 &703699660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,6 +1520,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1827477988280783976, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827477988280783976, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827477988280783976, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4652384506293391849, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1571,8 +1593,28 @@ PrefabInstance:
       value: Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 4652384506293391851, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: missileEffect
+      value: 
+      objectReference: {fileID: 321128885}
+    - target: {fileID: 4652384506293391851, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: missileBulletPos
+      value: 
+      objectReference: {fileID: 48130478}
+    - target: {fileID: 4652384506293391851, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
       propertyPath: assaultRifleBullet
       value: 
       objectReference: {fileID: 2354266376056986323, guid: fb0278cceba5de845af28051cd41c4a6, type: 3}
+    - target: {fileID: 4652384506784415910, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652384506784415910, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652384506784415910, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.677
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
