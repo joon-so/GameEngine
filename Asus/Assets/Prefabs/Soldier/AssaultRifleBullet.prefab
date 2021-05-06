@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e0d8259ef31f94bb7c2b2f9b1b872a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
-  accuracy: 95
+  speed: 20
+  accuracy: 100
   fireRate: 5
   muzzlePrefab: {fileID: 1357030889595668, guid: 31d15199ffdbd87468857df8492d57ae, type: 3}
   hitPrefab: {fileID: 1801918589960200, guid: 03280e26db9a2524c8409f02a2ab4d7d, type: 3}

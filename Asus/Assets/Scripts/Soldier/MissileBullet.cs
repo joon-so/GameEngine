@@ -73,7 +73,7 @@ public class MissileBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 100.0f)
+        if (Vector3.Distance(startPos, transform.position) > 15.0f)
             Destroy(gameObject);
     }
 

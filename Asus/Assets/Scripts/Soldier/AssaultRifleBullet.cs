@@ -75,7 +75,7 @@ public class AssaultRifleBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 20.0f)
+        if (Vector3.Distance(startPos, transform.position) > 7.0f)
             Destroy(gameObject);
     }
 

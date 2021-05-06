@@ -9700,7 +9700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c41aa5805f02944abd6e7d414af6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 60
   accuracy: 100
   fireRate: 1
   muzzlePrefab: {fileID: 1232470965182556, guid: 2765bd2d85d69614e8cc9a32c900b9d4, type: 3}

@@ -359,11 +359,11 @@ public class Fighter : MonoBehaviour
         anim.SetTrigger("Dodge");
         canMove = false;
         doingDodge = true;
-        moveSpeed = 3.0f;
+        moveSpeed = 1.0f;
         yield return new WaitForSeconds(0.3f);
-        moveSpeed = 10.0f;
+        moveSpeed = 6.0f;
         yield return new WaitForSeconds(0.8f);
-        moveSpeed = 3.0f;
+        moveSpeed = 1.0f;
         yield return new WaitForSeconds(0.5f);
         moveSpeed = 5.0f;
         canMove = true;

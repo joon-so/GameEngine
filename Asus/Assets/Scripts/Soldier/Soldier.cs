@@ -279,9 +279,9 @@ public class Soldier : MonoBehaviour
         curDodgeCoolTime = 0.0f;
         anim.SetTrigger("Dodge");
         doingDodge = true;
-        moveSpeed = 10.0f;
+        moveSpeed = 8.0f;
         yield return new WaitForSeconds(0.6f);
-        moveSpeed = 3.0f;
+        moveSpeed = 2.0f;
         yield return new WaitForSeconds(0.25f);
         moveSpeed = 5.0f;
         canMove = true;
@@ -328,7 +328,7 @@ public class Soldier : MonoBehaviour
             anim.SetTrigger("shootMissileLauncher");
             GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
             Rigidbody missileRigid = instantMissile.GetComponent<Rigidbody>();
-            missileRigid.velocity = missileBulletPos.forward * 100;
+            missileRigid.velocity = missileBulletPos.forward;
 
             yield return new WaitForSeconds(1.0f);
 
@@ -354,8 +354,8 @@ public class Soldier : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            if (Vector3.Distance(nextVec, transform.position) > 15)
-                nextVec = nextVec.normalized * 15;
+            if (Vector3.Distance(nextVec, transform.position) > 6)
+                nextVec = nextVec.normalized * 6;
 
             transform.LookAt(transform.position + nextVec);
             nextVec.y = 5;
