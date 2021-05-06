@@ -5,12 +5,13 @@ using UnityEngine.AI;
 
 public class Enemy1 : MonoBehaviour
 {
-    [SerializeField] [Range(30f, 100f)] float detectDistance;
-    [SerializeField] [Range(30f, 100f)] float shootDistance = 30f;
+    [SerializeField] [Range(1f, 30f)] float detectDistance = 15f;
+    [SerializeField] [Range(1f, 30f)] float shootDistance = 10f;
     [SerializeField] GameObject bullet = null;
     [SerializeField] Transform bulletPos;
 
     public float shootCooltime = 3.0f;
+    public float spinSpeed = 50.0f;
 
     bool shootable = true;
     bool movable = true;
@@ -40,8 +41,52 @@ public class Enemy1 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (shootable)
-            StartCoroutine(Attack());
+        mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+
+        if (mainCharacter == null)
+        {
+            return;
+        }
+        else
+        {
+            playerDistance = Vector3.Distance(mainCharacter.transform.position, transform.position);
+
+            //Attack
+            if (playerDistance < shootDistance)
+            {
+                if (movable)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(mainCharacter.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                nav.SetDestination(transform.position);
+
+                if (shootable)
+                    StartCoroutine(Attack());
+            }
+            //Detect
+            else if (playerDistance < detectDistance)
+            {
+                Debug.Log("dasd");
+                if (movable)
+                    nav.SetDestination(mainCharacter.transform.position);
+            }
+            else
+            {
+                if (Vector3.Distance(startPoint, transform.position) < 0.1f)
+                {
+                    //anim.SetBool("isRun", false);
+                }
+                else
+                {
+                    // anim.SetBool("isRun", true);
+                }
+
+                if (movable)
+                    nav.SetDestination(startPoint);
+            }
+        }
     }
 
     IEnumerator Attack()
