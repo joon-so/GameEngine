@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RNMUI7_LOGO
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: cbbade8368c51184081f7bae908658a0, type: 3}
+    totalSpriteSurfaceArea: 884413
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 4bfcf6218131cdd4cb4039fa0a37c136, type: 3}
+  - {fileID: 21300000, guid: 7c26f1354d822ec4aa9694cab4d8a633, type: 3}
+  - {fileID: 21300000, guid: 81579f56f58604b48adb7ba571c4dd20, type: 3}
+  - {fileID: 21300000, guid: 7be5cf5953668504cac0da8bf26024c7, type: 3}
+  - {fileID: 21300000, guid: 931132accd694254e8f2e18ece2f140f, type: 3}
+  - {fileID: 21300000, guid: 551fd9df94b68474ea77cfe3e726947f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Logo_Border_Inner
+  - Logo_Border_Bottom
+  - Logo_InnerGlow
+  - Logo_Background
+  - Logo_Border_Top
+  - Logo_Texts
+  m_Tag: RNMUI7_LOGO
+  m_IsVariant: 0

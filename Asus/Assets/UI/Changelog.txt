@@ -1,0 +1,8 @@
+Version 1.2:
+- Fixed warnings.
+
+Version 1.1:
+- Update for Unity 2019.
+
+Version 1.0:
+- Initial release.

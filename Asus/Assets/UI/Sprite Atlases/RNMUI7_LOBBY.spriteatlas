@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RNMUI7_LOBBY
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 7515101fd6aea464e80fec120cac9315, type: 3}
+    totalSpriteSurfaceArea: 582519
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 0d22864096f42234cad0e91c57dd3415, type: 3}
+  - {fileID: 21300000, guid: 3e64d690039fac24fbe5183092228e8d, type: 3}
+  - {fileID: 21300000, guid: 3f892e31d7d081345971d3ca7c6113c6, type: 3}
+  - {fileID: 21300000, guid: 47b38c61b6bcbd14eb782e9818488cdd, type: 3}
+  - {fileID: 21300000, guid: 70c290d294f21d44f8cc7f3d149de651, type: 3}
+  - {fileID: 21300000, guid: ee9825d2a8e23114889cf2f0f796c7c0, type: 3}
+  - {fileID: 21300000, guid: 41d7b6d2099d2c5409cc780c245b4db8, type: 3}
+  - {fileID: 21300000, guid: 631f3243839731a4097583e093ddf1e8, type: 3}
+  - {fileID: 21300000, guid: 4daead14ec4af3340a2ae3d89c5f00f2, type: 3}
+  - {fileID: 21300000, guid: 751d776415e3a8946aa09df7f27afe5d, type: 3}
+  - {fileID: 21300000, guid: bb0af075c768b594ebdea32955cf306f, type: 3}
+  - {fileID: 21300000, guid: c2ef6875e9e7ed24ea31b9213a40a213, type: 3}
+  - {fileID: 21300000, guid: 0d0d8f75020581f44b3dc1afcd3b9bdd, type: 3}
+  - {fileID: 21300000, guid: 0c88b15656fbd1744b4c49d1804db0b7, type: 3}
+  - {fileID: 21300000, guid: 754f38e6289634a45abbb596b93f0ae3, type: 3}
+  - {fileID: 21300000, guid: 9b9ca00712f873940ad0cb5ca535ba26, type: 3}
+  - {fileID: 21300000, guid: 2ad2d3c7b8af52745ad4c97ef419f570, type: 3}
+  - {fileID: 21300000, guid: 4db95b28be5ffad4dba680b92abf0cec, type: 3}
+  - {fileID: 21300000, guid: b17ca07875b143e428dd3b32fbd7ab59, type: 3}
+  - {fileID: 21300000, guid: 610d3fb8dcaa0274c8e2540f9f9c5e9d, type: 3}
+  - {fileID: 21300000, guid: 48d2c52910e1b554792234c8d2674e9f, type: 3}
+  - {fileID: 21300000, guid: a5357f395ba798d449c40e8de1c8b5a3, type: 3}
+  - {fileID: 21300000, guid: 681ad359ef9984b4894d7b39fbd25a54, type: 3}
+  - {fileID: 21300000, guid: 7345e089ff47f924a9a53806b2cf775a, type: 3}
+  - {fileID: 21300000, guid: f3a9833ae540735408d567f593a88089, type: 3}
+  - {fileID: 21300000, guid: 390f554abbb371c428113fd29c5a3940, type: 3}
+  - {fileID: 21300000, guid: f04707ba1c1cc7d408c8ec95a32b7f3c, type: 3}
+  - {fileID: 21300000, guid: 0c3186cab9c326041aff76092a3ee2f7, type: 3}
+  - {fileID: 21300000, guid: fa901f8b9f08ad548804ec80f37fc432, type: 3}
+  - {fileID: 21300000, guid: a2c0859ba2ca0df46928afe2498d577a, type: 3}
+  - {fileID: 21300000, guid: cc5efabd9494f2947b76267384f43451, type: 3}
+  - {fileID: 21300000, guid: 47cf48eeff3201c40a9246f79a9453c9, type: 3}
+  - {fileID: 21300000, guid: 9035638f3eb58444d8c0442332ddd78e, type: 3}
+  - {fileID: 21300000, guid: d37375cf58555f4418e84287713b22de, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - CC_Faction_Blue
+  - Button_Arrow_Foreground
+  - CC_Gender_Female
+  - CC_Separator
+  - CC_Box_Background
+  - Offense
+  - BottomBar_Background
+  - CC_Section_Header
+  - CC_Box_Border
+  - CSH_Box_Avatar
+  - CC_Box_Active
+  - CSH_Box_Active
+  - Lobby_Tooltip_Background
+  - CC_Section_Border
+  - CC_Faction_Red
+  - CC_Color_Background
+  - CSH_Box_Background
+  - CSL_Character_Avatar
+  - CSL_Character_Active
+  - Defense
+  - BottomBar_Border
+  - Tank
+  - Button_Arrow_Overlay
+  - CSL_Character_Icon_CreateNew
+  - CSH_Box_Border
+  - CC_Gender_Male
+  - Lobby_Tooltip_Anchor_Horizontal
+  - CSL_Character_Avatar_Border
+  - Lobby_Tooltip_Anchor_Vertical
+  - CS3D_Info_Glow
+  - CSL_Character_DeleteButton
+  - Button_Arrow_Background
+  - CSL_Character_Avatar_Background
+  - Support
+  m_Tag: RNMUI7_LOBBY
+  m_IsVariant: 0

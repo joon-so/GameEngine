@@ -8,9 +8,6 @@ public class Fighter : MonoBehaviour
     [SerializeField] GameObject effectRightStaff = null;
     [SerializeField] GameObject qSkill = null;
     public Transform qSkillPos = null;
-    //[SerializeField] GameObject qSkillObj1 = null;
-    //[SerializeField] GameObject qSkillObj2 = null;
-    //[SerializeField] GameObject qSkillObj3 = null;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
@@ -40,9 +37,7 @@ public class Fighter : MonoBehaviour
     bool canWSkill;
     bool doingDodge;
     bool doingSkill;
-
-    //bool transScale;
-    //float curScale;
+    
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -61,8 +56,6 @@ public class Fighter : MonoBehaviour
         doingDodge = false;
         doingSkill = false;
 
-        //transScale = false;
-        //curScale = 1;
         StartCoroutine(StartMotion());
     }
 
@@ -299,29 +292,11 @@ public class Fighter : MonoBehaviour
 
         effectLeftStaff.SetActive(false);
         effectRightStaff.SetActive(false);
+
         anim.SetTrigger("QSkill");
         anim.SetFloat("Speed", 0.2f);
-        //qSkill.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //qSkillObj1.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //qSkillObj2.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //qSkillObj3.transform.localScale = new Vector3(curScale, curScale, curScale);
-
         yield return new WaitForSeconds(0.5f);
         Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
-
-        //qSkill.SetActive(true);
-
-        //while (curScale < 5)
-        //{
-        //    if (curScale < 5)
-        //        curScale += Time.deltaTime * 5;
-        //    qSkill.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //    qSkillObj1.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //    qSkillObj2.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //    qSkillObj3.transform.localScale = new Vector3(curScale, curScale, curScale);
-        //    Debug.Log(qSkill.transform.localScale);
-        //}
-
         anim.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
         anim.SetFloat("Speed", 1.0f);
@@ -333,8 +308,6 @@ public class Fighter : MonoBehaviour
         canMove = true;
         isRun = false;
         doingSkill = false;
-        //transScale = false;
-        //curScale = 1;
         anim.SetBool("Run", isRun);
     }
 
