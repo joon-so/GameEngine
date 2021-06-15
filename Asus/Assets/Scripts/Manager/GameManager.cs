@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public float subPlayerHp;
     public float subPlayerEp;
 
+    public GameObject mainPlayerMark;
+    public GameObject subPlayerMark;
+
     void Awake()
     {
         if(instance == null)
@@ -37,6 +40,10 @@ public class GameManager : MonoBehaviour
         character2.gameObject.tag = "MainCharacter";
         character1.gameObject.layer = 7;
         character2.gameObject.layer = 6;
+
+        GameObject temp = mainPlayerMark;
+        mainPlayerMark = subPlayerMark;
+        subPlayerMark = temp;
     }
     public void Tag2()
     {
@@ -44,5 +51,9 @@ public class GameManager : MonoBehaviour
         character2.gameObject.tag = "SubCharacter";
         character1.gameObject.layer = 6;
         character2.gameObject.layer = 7;
+
+        GameObject temp = mainPlayerMark;
+        mainPlayerMark = subPlayerMark;
+        subPlayerMark = temp;
     }
 }

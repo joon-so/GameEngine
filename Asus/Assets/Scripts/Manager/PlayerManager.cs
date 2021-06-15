@@ -25,7 +25,8 @@ public class PlayerManager : MonoBehaviour
         {
             Tag();
         }
-
+        GameManager.instance.mainPlayerMark.transform.position = new Vector3(GameManager.instance.character1.transform.position.x, 0.1f, GameManager.instance.character1.transform.position.z);
+        GameManager.instance.subPlayerMark.transform.position = new Vector3(GameManager.instance.character2.transform.position.x, 0.1f, GameManager.instance.character2.transform.position.z);
     }
 
     void InitCharacter()
