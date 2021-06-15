@@ -68,7 +68,6 @@ public class Enemy1 : MonoBehaviour
             //Detect
             else if (playerDistance < detectDistance)
             {
-                Debug.Log("dasd");
                 if (movable)
                     nav.SetDestination(mainCharacter.transform.position);
             }
@@ -85,6 +84,11 @@ public class Enemy1 : MonoBehaviour
 
                 if (movable)
                     nav.SetDestination(startPoint);
+            }
+
+            if (currentHp <= 0)
+            {
+                GetComponent<TriangleExplosion>().ExplosionMesh();
             }
         }
     }
