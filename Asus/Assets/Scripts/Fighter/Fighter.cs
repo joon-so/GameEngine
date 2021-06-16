@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Fighter : MonoBehaviour
+public class Fighter : SubAI
 {
     [SerializeField] GameObject effectLeftStaff = null;
     [SerializeField] GameObject effectRightStaff = null;
@@ -24,7 +25,6 @@ public class Fighter : MonoBehaviour
     Vector3 vecTarget;
 
     Animator anim;
-    GameObject tagCharacter;
 
     float distanceWithPlayer;
     public float followDistance = 20.0f;
@@ -52,6 +52,11 @@ public class Fighter : MonoBehaviour
         curDodgeCoolTime = dodgeCoolTime;
         curQskillCoolTime = qskillCoolTime;
         curWskillCoolTime = wskillCoolTime;
+
+        FindEnemys();
+
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
 
         canDodge = false;
         canMove = false;
@@ -91,10 +96,24 @@ public class Fighter : MonoBehaviour
                 W_Skill();
             }
         }
-        else
+        else if (gameObject.transform.tag == "SubCharacter")
         {
-            // Follow();
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace();
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+            }
         }
+        Tag();
     }
 
     void Move()
@@ -388,6 +407,21 @@ public class Fighter : MonoBehaviour
         //}
     }
 
+    void Tag()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
+            if(nav.enabled == false)
+            {
+                nav.enabled = true;
+            }
+            else
+            {
+                nav.enabled = false;
+            }
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
