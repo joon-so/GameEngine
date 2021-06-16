@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Soldier : MonoBehaviour
+public class Soldier : SubAI
 {
     [SerializeField] GameObject attackRange = null;
     [SerializeField] GameObject useAssaultRifle = null;
@@ -24,7 +25,7 @@ public class Soldier : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     public float fireCoolTime = 0.5f;
-
+    public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
 
     public float dodgeCoolTime = 3.0f;
@@ -44,6 +45,8 @@ public class Soldier : MonoBehaviour
     bool canDodge;
     bool canSkill;
 
+    float curFireDelay;
+
     bool doingDodge;
 
     Vector3 vecTarget;
@@ -53,11 +56,11 @@ public class Soldier : MonoBehaviour
     Animator anim;
 
     float distanceWithPlayer;
-    GameObject tagCharacter;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
@@ -66,12 +69,18 @@ public class Soldier : MonoBehaviour
         onQSkill = true;
         onWSkill = true;
 
+        FindEnemys();
+
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+
         canAttack = false;
         canMove = false;
         canDodge = false;
         canSkill = false;
 
         doingDodge = false;
+
 
         curDodgeCoolTime = dodgeCoolTime;
         StartCoroutine(DrawAssaultRifle());
@@ -106,8 +115,48 @@ public class Soldier : MonoBehaviour
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace();
+                anim.SetBool("Run", true);
+                curFireDelay = 1f;
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
 
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+                    Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                    bulletRigid.velocity = assaultRifleBulletPos.forward;
+
+                    moveSpeed = 0f;
+                    anim.SetBool("Run", false);
+                    vecTarget = transform.position;
+
+                    anim.SetTrigger("shootAssaultRifle");
+                    curFireDelay = 0;
+
+                    StartCoroutine(AttackDelay());
+                }
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                anim.SetBool("Run", false);
+                curFireDelay = 1f;
+            }
         }
+        Tag();
     }
     void Move()
     {
@@ -370,6 +419,22 @@ public class Soldier : MonoBehaviour
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+
+    void Tag()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
+            if (nav.enabled == false)
+            {
+                nav.enabled = true;
+            }
+            else
+            {
+                nav.enabled = false;
+            }
+        }
     }
 
     void OnCollisionEnter(Collision collision)
