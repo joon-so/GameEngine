@@ -9,18 +9,23 @@ public class GameManager : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
-    public float mainPlayerMaxHp;
-    public float mainPlayerMaxEp;
-    public float subPlayerMaxHp;
-    public float subPlayerMaxEp;
+    public float character1MaxHp;
+    public float character1MaxEp;
+    public float character2MaxHp;
+    public float character2MaxEp;
 
-    public float mainPlayerHp;
-    public float mainPlayerEp;
-    public float subPlayerHp;
-    public float subPlayerEp;
+    public float character1Hp;
+    public float character1Ep;
+    public float character2Hp;
+    public float character2Ep;
 
     public GameObject mainPlayerMark;
     public GameObject subPlayerMark;
+
+    public float character1QCoolTime;
+    public float character1WCoolTime;
+    public float character2QCoolTime;
+    public float character2WCoolTime;
 
     void Awake()
     {
@@ -32,6 +37,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        character1Hp = character1MaxHp;
+        character1Ep = character1MaxEp;
+        character2Hp = character2MaxHp;
+        character2Ep = character2MaxEp;
+
+        character1QCoolTime = 0;
+        character1WCoolTime = 0;
+        character2QCoolTime = 0;
+        character2WCoolTime = 0;
     }
 
     public void Tag1()
