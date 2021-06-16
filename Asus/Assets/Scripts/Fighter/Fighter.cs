@@ -8,7 +8,6 @@ public class Fighter : MonoBehaviour
     [SerializeField] GameObject effectRightStaff = null;
     [SerializeField] GameObject qSkill = null;
     public Transform qSkillPos = null;
-
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
     float curDodgeCoolTime = 0;
@@ -27,9 +26,7 @@ public class Fighter : MonoBehaviour
     public float followDistance = 20.0f;
 
     public float qskillCoolTime = 5.0f;
-    float curQskillCoolTime = 0f;
     public float wskillCoolTime = 5.0f;
-    float curWskillCoolTime = 0f;
 
     bool canDodge;
     bool canMove;
@@ -45,8 +42,6 @@ public class Fighter : MonoBehaviour
         vecTarget = transform.position;
 
         curDodgeCoolTime = dodgeCoolTime;
-        curQskillCoolTime = qskillCoolTime;
-        curWskillCoolTime = wskillCoolTime;
 
         canDodge = false;
         canMove = false;
@@ -226,9 +221,9 @@ public class Fighter : MonoBehaviour
             canDodge = true;
         }
 
-        if (curQskillCoolTime < qskillCoolTime)
+        if (GameManager.instance.character1QCoolTime < qskillCoolTime)
         {
-            curQskillCoolTime += Time.deltaTime;
+            GameManager.instance.character1QCoolTime += Time.deltaTime;
             canQSkill = false;
         }
         else
@@ -236,9 +231,9 @@ public class Fighter : MonoBehaviour
             canQSkill = true;
         }
 
-        if (curWskillCoolTime < wskillCoolTime)
+        if (GameManager.instance.character1WCoolTime < wskillCoolTime)
         {
-            curWskillCoolTime += Time.deltaTime;
+            GameManager.instance.character1WCoolTime += Time.deltaTime;
             canWSkill = false;
         }
         else
@@ -288,7 +283,7 @@ public class Fighter : MonoBehaviour
     {
         doingSkill = true;
         canMove = false;
-        curQskillCoolTime = 0.0f;
+        GameManager.instance.character1QCoolTime = 0.0f;
 
         effectLeftStaff.SetActive(false);
         effectRightStaff.SetActive(false);
@@ -316,7 +311,7 @@ public class Fighter : MonoBehaviour
         anim.SetTrigger("WSkill");
         canMove = false;
         doingSkill = true;
-        curWskillCoolTime = 0.0f;
+        GameManager.instance.character1WCoolTime = 0.0f;
         yield return new WaitForSeconds(2.8f);
 
         vecTarget = transform.position;
