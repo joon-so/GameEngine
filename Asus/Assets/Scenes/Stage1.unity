@@ -13137,16 +13137,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character1: {fileID: 2032381526}
   character2: {fileID: 1095044060}
-  mainPlayerMaxHp: 0
-  mainPlayerMaxEp: 0
-  subPlayerMaxHp: 0
-  subPlayerMaxEp: 0
-  mainPlayerHp: 0
-  mainPlayerEp: 0
-  subPlayerHp: 0
-  subPlayerEp: 0
+  character1MaxHp: 0
+  character1MaxEp: 0
+  character2MaxHp: 0
+  character2MaxEp: 0
+  character1Hp: 0
+  character1Ep: 0
+  character2Hp: 0
+  character2Ep: 0
   mainPlayerMark: {fileID: 1527891661}
   subPlayerMark: {fileID: 129887969}
+  character1QCoolTime: 0
+  character1WCoolTime: 0
+  character2QCoolTime: 0
+  character2WCoolTime: 0
 --- !u!4 &720194151
 Transform:
   m_ObjectHideFlags: 0
@@ -26429,6 +26433,14 @@ PrefabInstance:
       propertyPath: tagCharacter
       value: 
       objectReference: {fileID: 2032381526}
+    - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: traceDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: attackDistance
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
 --- !u!1001 &1513650852
@@ -28993,8 +29005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusCharacter: {fileID: 764552317}
-  mainCharacter: {fileID: 2032381526}
-  subCharacter: {fileID: 1095044060}
+  character1: {fileID: 0}
+  character2: {fileID: 0}
 --- !u!4 &1708809382
 Transform:
   m_ObjectHideFlags: 0
@@ -34782,7 +34794,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032381526}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -35953,6 +35965,14 @@ PrefabInstance:
       propertyPath: tagCharacter
       value: 
       objectReference: {fileID: 1095044060}
+    - target: {fileID: 4100665984576853065, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: traceDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100665984576853065, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: attackDistance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4190933429343928760, guid: e41a6887958c93649903f467ecc80545, type: 3}
       propertyPath: m_RootOrder
       value: 3

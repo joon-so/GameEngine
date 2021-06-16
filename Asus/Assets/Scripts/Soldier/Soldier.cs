@@ -88,6 +88,7 @@ public class Soldier : SubAI
 
     void Update()
     {
+        curFireDelay += Time.deltaTime;
         if (gameObject.transform.tag == "MainCharacter")
         {
             fireDelay += Time.deltaTime;
@@ -426,14 +427,6 @@ public class Soldier : SubAI
         if (Input.GetKeyDown(KeyCode.F))
         {
             vecTarget = transform.position;
-            if (nav.enabled == false)
-            {
-                nav.enabled = true;
-            }
-            else
-            {
-                nav.enabled = false;
-            }
         }
     }
 

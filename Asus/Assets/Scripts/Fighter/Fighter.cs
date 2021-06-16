@@ -380,14 +380,6 @@ public class Fighter : SubAI
         if (Input.GetKeyDown(KeyCode.F))
         {
             vecTarget = transform.position;
-            if(nav.enabled == false)
-            {
-                nav.enabled = true;
-            }
-            else
-            {
-                nav.enabled = false;
-            }
         }
     }
 

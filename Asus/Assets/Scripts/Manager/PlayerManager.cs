@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -33,12 +34,16 @@ public class PlayerManager : MonoBehaviour
         {
             mainCameraController.focus = character2.transform;
             GameManager.instance.Tag1();
+            GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             isTag = false;
         }
         else
         {
             mainCameraController.focus = character1.transform;
             GameManager.instance.Tag2();
+            GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             isTag = true;
         }
     }
