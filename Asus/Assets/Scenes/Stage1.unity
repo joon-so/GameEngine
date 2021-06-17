@@ -692,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &15603220
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5302,6 +5302,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1478536472}
     m_Modifications:
+    - target: {fileID: 1233511053643191400, guid: 234080c7f240c864b8c97819856bdff0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233511053643191400, guid: 234080c7f240c864b8c97819856bdff0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6175160082467517231, guid: 234080c7f240c864b8c97819856bdff0, type: 3}
       propertyPath: shootDistance
       value: 10
@@ -9360,7 +9368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -19484,7 +19492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20255,7 +20263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -23408,8 +23416,10 @@ MonoBehaviour:
   character2Mask_S: {fileID: 2071795191}
   character1QSkill: {fileID: 490369722}
   character1WSkill: {fileID: 2072941851}
+  character1Dodge: {fileID: 243881770}
   character2QSkill: {fileID: 321535586}
   character2WSkill: {fileID: 820711675}
+  character2Dodge: {fileID: 15603219}
   character1QSkillCoolDown: {fileID: 357192111}
   character1WSkillCoolDown: {fileID: 1901967318}
   character1DodgeCoolDown: {fileID: 1607654583}
@@ -32595,7 +32605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -35367,7 +35377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -38540,12 +38550,6 @@ MonoBehaviour:
   character2Ep: 0
   mainPlayerMark: {fileID: 1527891661}
   subPlayerMark: {fileID: 129887969}
-  character1DodgeCoolTime: 0
-  character1QCoolTime: 0
-  character1WCoolTime: 0
-  character2DodgeCoolTime: 0
-  character2QCoolTime: 0
-  character2WCoolTime: 0
   onDodge: 0
   onQSkill: 0
   onWSkill: 0
@@ -40879,7 +40883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.4}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
