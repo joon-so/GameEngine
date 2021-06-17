@@ -287,8 +287,12 @@ public class Fighter : SubAI
     {
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            if (GameManager.instance.character1Ep <= 0)
+                return;
+
             UIManager.instance.character1QSkillCoolDown.fillAmount = 1;
-            
+            GameManager.instance.character1Ep -= 20;
+
             onQSkill = false;
             anim.SetBool("Run", false);
 
@@ -305,8 +309,12 @@ public class Fighter : SubAI
     {
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            if (GameManager.instance.character1Ep <= 0)
+                return;
+
             UIManager.instance.character1WSkillCoolDown.fillAmount = 1;
-            
+            GameManager.instance.character1Ep -= 40;
+
             onWSkill = false;
             anim.SetBool("Run", false);
 
@@ -321,6 +329,9 @@ public class Fighter : SubAI
 
     void CoolTime()
     {
+        if(GameManager.instance.character1Ep < 150)
+            GameManager.instance.character1Ep += Time.deltaTime;
+
         if (!onDodge)
         {
             UIManager.instance.character1DodgeCoolDown.fillAmount -= 1 / dodgeCoolTime * Time.deltaTime;

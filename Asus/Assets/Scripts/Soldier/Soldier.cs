@@ -264,7 +264,11 @@ public class Soldier : SubAI
     {
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            if (GameManager.instance.character1Ep <= 0)
+                return;
+
             UIManager.instance.character2QSkillCoolDown.fillAmount = 1;
+            GameManager.instance.character1Ep -= 30;
 
             onQSkill = false;
             anim.SetBool("Run", false);
@@ -281,7 +285,11 @@ public class Soldier : SubAI
     {
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            if (GameManager.instance.character1Ep <= 0)
+                return;
+
             UIManager.instance.character2WSkillCoolDown.fillAmount = 1;
+            GameManager.instance.character1Ep -= 50;
 
             onWSkill = false;
             anim.SetBool("Run", false);
@@ -296,6 +304,9 @@ public class Soldier : SubAI
     }
     void CoolTime()
     {
+        if (GameManager.instance.character1Ep < 200)
+            GameManager.instance.character1Ep += Time.deltaTime;
+
         if (!onDodge)
         {
             UIManager.instance.character2DodgeCoolDown.fillAmount -= 1 / dodgeCoolTime * Time.deltaTime;

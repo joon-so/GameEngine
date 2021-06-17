@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject character2WSkill;
     [SerializeField] GameObject character2Dodge;
 
+    [SerializeField] GameObject gameMenu;
 
     public Image character1QSkillCoolDown;
     public Image character1WSkillCoolDown;
@@ -38,7 +40,7 @@ public class UIManager : MonoBehaviour
     public Image character2WSkillCoolDown;
     public Image character2DodgeCoolDown;
 
-    private bool isTag;         
+    private bool isTag;
 
     void  Awake()
     {
@@ -76,6 +78,19 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Tag();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameMenu.activeSelf)
+            {
+                gameMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                gameMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
         }
     }
 
@@ -145,5 +160,16 @@ public class UIManager : MonoBehaviour
 
             isTag = true;
         }
+    }
+
+    public void OnClickResume()
+    {
+        gameMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void OnClickExit()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
