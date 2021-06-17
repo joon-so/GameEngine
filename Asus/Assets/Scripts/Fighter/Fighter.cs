@@ -5,60 +5,76 @@ using UnityEngine.AI;
 
 public class Fighter : SubAI
 {
-    [SerializeField] GameObject effectLeftStaff = null;
-    [SerializeField] GameObject effectRightStaff = null;
+    [SerializeField] GameObject leftStaffEffect = null;
+    [SerializeField] GameObject rightStaffEffect = null;
+
     [SerializeField] GameObject qSkill = null;
     public Transform qSkillPos = null;
+
+    [SerializeField] GameObject wLeftEffect = null;
+    [SerializeField] GameObject wRightEffect = null;
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
-    float curDodgeCoolTime = 0;
+    public float followDistance = 5.0f;
 
-    float curFireDelay = 1.0f;
-    public float subFireDelay = 1.5f;
-    bool doAttack = false;
-    bool motionEndCheck = true;
-    bool comboContinue = true;
-    bool isRun = false;
+    public static float qSkillCoolTime = 5.0f;
+    public static float wSkillCoolTime = 5.0f;
+    public static float eSkillCoolTime = 5.0f;
+    public static int attackDamage = 20;
+    public static int qSkillDamage = 60;
+    public static int wSkillDamage = 10;
+
+    float curDodgeCoolTime;
+    float curQSkillCoolTime;
+    float curWSkillCoolTime;
+
+    bool canMove;
+    bool canDodge;
+    bool canAttack;
+    bool canSkill;
+
+    bool onDodge;
+    bool onQSkill;
+    bool onWSkill;
+
+    bool doingAttack;
+    bool motionEndCheck;
+    bool comboContinue;
+
+    float curFireDelay;
+    float subFireDelay = 1.5f;
 
     Vector3 vecTarget;
 
     Animator anim;
 
     float distanceWithPlayer;
-    public float followDistance = 20.0f;
 
-    public float qskillCoolTime = 5.0f;
-    public float wskillCoolTime = 5.0f;
-
-    bool canDodge;
-    bool canMove;
-    bool canQSkill;
-    bool canWSkill;
-    bool doingDodge;
-    bool doingSkill;
-    
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-
-        vecTarget = transform.position;
-
-        curDodgeCoolTime = dodgeCoolTime;
-
-        FindEnemys();
-
+        anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
 
-        canDodge = false;
+        curDodgeCoolTime = 0;
+        curQSkillCoolTime = 0;
+        curWSkillCoolTime = 0;
+
         canMove = false;
-        canQSkill = false;
-        canWSkill = false;
+        canDodge = false;
+        canAttack = false;
+        canSkill = false;
 
-        doingDodge = false;
-        doingSkill = false;
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        doingAttack = false;
+        motionEndCheck = true;
+        comboContinue = true;
 
         StartCoroutine(StartMotion());
+        FindEnemys();
     }
 
     void Update()
@@ -66,25 +82,18 @@ public class Fighter : SubAI
         if (gameObject.transform.tag == "MainCharacter")
         {
             if (canMove)
-            {
                 Move();
-                Stop();
+            if (canAttack)
                 Attack();
-            }
             if (canDodge)
                 Dodge();
-            if (doingDodge)
-            {
-                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-                vecTarget = transform.position;
-            }
-            AttackRange();
-            CoolTime();
-            if (!doingSkill && !doingDodge)
+            if (canSkill)
             {
                 Q_Skill();
                 W_Skill();
             }
+            Stop();
+            CoolTime();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -145,40 +154,61 @@ public class Fighter : SubAI
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
+        anim.SetBool("Run", vecTarget != transform.position);
 
-        isRun = vecTarget != transform.position;
-        anim.SetBool("Run", isRun);
-
-        if (doAttack)
+        if (doingAttack)
         {
-            isRun = false;
-            anim.SetBool("Run", isRun);
+            anim.SetBool("Run", false);
             vecTarget = transform.position;
         }
     }
-
-    void Dodge()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
-        {
-            StartCoroutine(dodge());
-        }
-    }
-
     void Stop()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = 0f;
-            isRun = false;
-            anim.SetBool("Run", isRun);
             vecTarget = transform.position;
+            anim.SetBool("Run", false);
+        }
+    }
+
+    void Dodge()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
+        {
+            onDodge = false;
+
+            canAttack = false;
+            canMove = false;
+            canSkill = false;
+
+            curDodgeCoolTime = 0.0f;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                Vector3 nextVec = hit.point - transform.position;
+                nextVec.y = 0;
+                transform.LookAt(transform.position + nextVec);
+            }
+
+            moveSpeed *= 2;
+            anim.SetTrigger("Dodge");
+
+            StartCoroutine(DodgeDelay());
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
+        {
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            vecTarget = transform.position;
+            anim.SetBool("Run", false);
         }
     }
 
     void Attack()
     {
-        if (doAttack)
+        if (doingAttack)
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
@@ -197,8 +227,8 @@ public class Fighter : SubAI
                 }
                 else if (comboContinue)
                 {
-                    doAttack = false;
-                    anim.SetBool("Attack", doAttack);
+                    doingAttack = false;
+                    anim.SetBool("Attack", doingAttack);
 
                 }
                 motionEndCheck = true;
@@ -207,10 +237,10 @@ public class Fighter : SubAI
 
         if (Input.GetMouseButtonDown(0))
         {
-            isRun = false;
-            anim.SetBool("Run", isRun);
+            canMove = false;
+            anim.SetBool("Run", canMove);
 
-            if ((doAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+            if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
                  && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
                  || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
                  || anim.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
@@ -227,28 +257,17 @@ public class Fighter : SubAI
             }
 
             moveSpeed = 0f;
-            doAttack = true;
-            anim.SetBool("Attack", doAttack);
+            doingAttack = true;
+            anim.SetBool("Attack", doingAttack);
         }
 
-        if (doAttack && Input.GetMouseButtonDown(1))
+        if (doingAttack && Input.GetMouseButtonDown(1))
         {
-            doAttack = false;
-            anim.SetBool("Attack", doAttack);
+            doingAttack = false;
+            anim.SetBool("Attack", doingAttack);
+            canMove = true;
+            anim.SetBool("Run", canMove);
         }
-    }
-
-    void AttackRange()
-    {
-        //attackRange.transform.position = transform.position;
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    attackRange.SetActive(true);
-        //}
-        //else if (Input.GetKeyUp(KeyCode.A))
-        //{
-        //    attackRange.SetActive(false);
-        //}
     }
 
     void CoolTime()
@@ -256,53 +275,62 @@ public class Fighter : SubAI
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
-            canDodge = false;
         }
         else
         {
-            canDodge = true;
+            onDodge = true;
         }
 
-        if (GameManager.instance.character1QCoolTime < qskillCoolTime)
+        if (GameManager.instance.character1QCoolTime < qSkillCoolTime)
         {
             GameManager.instance.character1QCoolTime += Time.deltaTime;
-            canQSkill = false;
         }
         else
         {
-            canQSkill = true;
+            onQSkill = true;
         }
 
-        if (GameManager.instance.character1WCoolTime < wskillCoolTime)
+        if (GameManager.instance.character1WCoolTime < wSkillCoolTime)
         {
             GameManager.instance.character1WCoolTime += Time.deltaTime;
-            canWSkill = false;
         }
         else
         {
-            canWSkill = true;
+            onWSkill = true;
         }
     }
 
     void Q_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
-            if (canQSkill)
-            {
-                StartCoroutine(BigAttack());
-            }
+            onQSkill = false;
+            curQSkillCoolTime = 0;
+            anim.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(BigAttack());
         }
     }
 
     void W_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
-            if (canWSkill)
-            {
-                StartCoroutine(StraightAttack());
-            }
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            anim.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(StraightAttack());
         }
     }
 
@@ -316,19 +344,30 @@ public class Fighter : SubAI
         yield return new WaitForSeconds(0.5f);
         anim.SetTrigger("StartMotion");
         yield return new WaitForSeconds(1.5f);
-        canDodge = true;
+        leftStaffEffect.SetActive(true);
+        rightStaffEffect.SetActive(true);
         canMove = true;
-        canQSkill = true;
-        canWSkill = true;
+        canAttack = true;
+        canDodge = true;
+        canSkill = true;
+
+        vecTarget = transform.position;
     }
+
+    IEnumerator DodgeDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        canAttack = true;
+        canMove = true;
+        canSkill = true;
+    }
+
     IEnumerator BigAttack()
     {
-        doingSkill = true;
-        canMove = false;
         GameManager.instance.character1QCoolTime = 0.0f;
 
-        effectLeftStaff.SetActive(false);
-        effectRightStaff.SetActive(false);
+        leftStaffEffect.SetActive(false);
+        rightStaffEffect.SetActive(false);
 
         anim.SetTrigger("QSkill");
         anim.SetFloat("Speed", 0.2f);
@@ -338,46 +377,44 @@ public class Fighter : SubAI
         yield return new WaitForSeconds(1.0f);
         anim.SetFloat("Speed", 1.0f);
         yield return new WaitForSeconds(1.0f);
-        effectLeftStaff.SetActive(true);
-        effectRightStaff.SetActive(true);
+
+        leftStaffEffect.SetActive(true);
+        rightStaffEffect.SetActive(true);
 
         vecTarget = transform.position;
+        anim.SetBool("Run", false);
+
+        canAttack = true;
         canMove = true;
-        isRun = false;
-        doingSkill = false;
-        anim.SetBool("Run", isRun);
+        canDodge = true;
+        canSkill = true;
     }
 
     IEnumerator StraightAttack()
     {
-        anim.SetTrigger("WSkill");
-        canMove = false;
-        doingSkill = true;
         GameManager.instance.character1WCoolTime = 0.0f;
+
+        leftStaffEffect.SetActive(false);
+        rightStaffEffect.SetActive(false);
+
+        anim.SetTrigger("WSkill");
+        wLeftEffect.SetActive(true);
+        wRightEffect.SetActive(true);
         yield return new WaitForSeconds(2.8f);
 
-        vecTarget = transform.position;
-        canMove = true;
-        isRun = false;
-        doingSkill = false;
-        anim.SetBool("Run", isRun);
-    }
+        wLeftEffect.SetActive(false);
+        wRightEffect.SetActive(false);
 
-    IEnumerator dodge()
-    {
-        curDodgeCoolTime = 0.0f;
-        anim.SetTrigger("Dodge");
-        canMove = false;
-        doingDodge = true;
-        moveSpeed = 1.0f;
-        yield return new WaitForSeconds(0.3f);
-        moveSpeed = 6.0f;
-        yield return new WaitForSeconds(0.8f);
-        moveSpeed = 1.0f;
-        yield return new WaitForSeconds(0.5f);
-        moveSpeed = 5.0f;
+        leftStaffEffect.SetActive(true);
+        rightStaffEffect.SetActive(true);
+
+        vecTarget = transform.position;
+        anim.SetBool("Run", false);
+
+        canAttack = true;
         canMove = true;
-        doingDodge = false;
+        canDodge = true;
+        canSkill = true;
     }
 
     void Follow()
