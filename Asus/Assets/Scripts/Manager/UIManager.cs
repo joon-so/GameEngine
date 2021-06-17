@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [SerializeField] Image character1Hp;
     [SerializeField] Image character1Ep;
     [SerializeField] Image character2Hp;
@@ -22,10 +24,33 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject character1QSkill;
     [SerializeField] GameObject character1WSkill;
+    [SerializeField] GameObject character1Dodge;
     [SerializeField] GameObject character2QSkill;
     [SerializeField] GameObject character2WSkill;
+    [SerializeField] GameObject character2Dodge;
+
+
+    public Image character1QSkillCoolDown;
+    public Image character1WSkillCoolDown;
+    public Image character1DodgeCoolDown;
+
+    public Image character2QSkillCoolDown;
+    public Image character2WSkillCoolDown;
+    public Image character2DodgeCoolDown;
 
     private bool isTag;         
+
+    void  Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -36,8 +61,11 @@ public class UIManager : MonoBehaviour
 
         character1QSkill.SetActive(true);
         character1WSkill.SetActive(true);
+        character1Dodge.SetActive(true);
+
         character2QSkill.SetActive(false);
         character2WSkill.SetActive(false);
+        character2Dodge.SetActive(false);
 
         isTag = true;
     }
@@ -45,7 +73,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateHpEp();
-
         if (Input.GetKeyDown(KeyCode.F))
         {
             Tag();
@@ -93,8 +120,11 @@ public class UIManager : MonoBehaviour
 
             character1QSkill.SetActive(false);
             character1WSkill.SetActive(false);
+            character1Dodge.SetActive(false);
+
             character2QSkill.SetActive(true);
             character2WSkill.SetActive(true);
+            character2Dodge.SetActive(true);
 
             isTag = false;
         }
@@ -107,30 +137,13 @@ public class UIManager : MonoBehaviour
 
             character1QSkill.SetActive(true);
             character1WSkill.SetActive(true);
+            character1Dodge.SetActive(true);
+
             character2QSkill.SetActive(false);
             character2WSkill.SetActive(false);
+            character2Dodge.SetActive(false);
 
             isTag = true;
         }
     }
-
-    //void C1_QSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(KeyCode.Q) && c1_QSkillCoolDown == false)
-    //    {
-    //        c1_QSkillCoolDown = true;
-    //        c1_QSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c1_QSkillCoolDown)
-    //    {
-    //        c1_QSkillImg.fillAmount -= 1 / c1_QSkillcoolDown * Time.deltaTime;
-
-    //        if (c1_QSkillImg.fillAmount <= 0)
-    //        {
-    //            c1_QSkillImg.fillAmount = 0;
-    //            c1_QSkillCoolDown = false;
-    //        }
-    //    }
-    //}
 }

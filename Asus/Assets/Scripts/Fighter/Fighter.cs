@@ -15,12 +15,11 @@ public class Fighter : SubAI
     [SerializeField] GameObject wRightEffect = null;
 
     public float moveSpeed = 5.0f;
-    public float dodgeCoolTime = 5.0f;
+    public float dodgeCoolTime = 4.0f;
     public float followDistance = 5.0f;
 
-    public static float qSkillCoolTime = 5.0f;
-    public static float wSkillCoolTime = 5.0f;
-    public static float eSkillCoolTime = 5.0f;
+    public float qSkillCoolTime = 12.0f;
+    public float wSkillCoolTime = 10.0f;
 
     public static int attackDamage = 20;
     public static int qSkillDamage = 60;
@@ -31,7 +30,7 @@ public class Fighter : SubAI
     bool canAttack;
     bool canSkill;
 
-    bool onDodge;
+    public static bool onDodge;
     bool onQSkill;
     bool onWSkill;
 
@@ -67,6 +66,10 @@ public class Fighter : SubAI
         motionEndCheck = true;
         comboContinue = true;
 
+        UIManager.instance.character1DodgeCoolDown.fillAmount = 0;
+        UIManager.instance.character1QSkillCoolDown.fillAmount = 0;
+        UIManager.instance.character1WSkillCoolDown.fillAmount = 0;
+
         StartCoroutine(StartMotion());
     }
 
@@ -86,7 +89,6 @@ public class Fighter : SubAI
                 W_Skill();
             }
             Stop();
-            CoolTime();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -126,6 +128,7 @@ public class Fighter : SubAI
                 curFireDelay = 1f;
             }
         }
+        CoolTime();
         Tag();
     }
 
@@ -169,13 +172,13 @@ public class Fighter : SubAI
     {
         if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
+            UIManager.instance.character1DodgeCoolDown.fillAmount = 1;
+
             onDodge = false;
 
             canAttack = false;
             canMove = false;
             canSkill = false;
-
-            GameManager.instance.character1DodgeCoolTime = 0.0f;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -263,42 +266,13 @@ public class Fighter : SubAI
         }
     }
 
-    void CoolTime()
-    {
-        if (GameManager.instance.character1DodgeCoolTime < dodgeCoolTime)
-        {
-            GameManager.instance.character1DodgeCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onDodge = true;
-        }
-
-        if (GameManager.instance.character1QCoolTime < qSkillCoolTime)
-        {
-            GameManager.instance.character1QCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onQSkill = true;
-        }
-
-        if (GameManager.instance.character1WCoolTime < wSkillCoolTime)
-        {
-            GameManager.instance.character1WCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onWSkill = true;
-        }
-    }
-
     void Q_Skill()
     {
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            UIManager.instance.character1QSkillCoolDown.fillAmount = 1;
+            
             onQSkill = false;
-            GameManager.instance.character1QCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -314,8 +288,9 @@ public class Fighter : SubAI
     {
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            UIManager.instance.character1WSkillCoolDown.fillAmount = 1;
+            
             onWSkill = false;
-            GameManager.instance.character1WCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -327,9 +302,40 @@ public class Fighter : SubAI
         }
     }
 
-    void E_Skill()
+    void CoolTime()
     {
+        if (!onDodge)
+        {
+            UIManager.instance.character1DodgeCoolDown.fillAmount -= 1 / dodgeCoolTime * Time.deltaTime;
 
+            if (UIManager.instance.character1DodgeCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character1DodgeCoolDown.fillAmount = 0;
+                onDodge = true;
+            }
+        }
+
+        if (!onQSkill)
+        {
+            UIManager.instance.character1QSkillCoolDown.fillAmount -= 1 / qSkillCoolTime * Time.deltaTime;
+
+            if (UIManager.instance.character1QSkillCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character1QSkillCoolDown.fillAmount = 0;
+                onQSkill = true;
+            }
+        }
+
+        if (!onWSkill)
+        {
+            UIManager.instance.character1WSkillCoolDown.fillAmount -= 1 / wSkillCoolTime * Time.deltaTime;
+
+            if (UIManager.instance.character1WSkillCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character1WSkillCoolDown.fillAmount = 0;
+                onWSkill = true;
+            }
+        }
     }
 
     IEnumerator StartMotion()
@@ -357,8 +363,6 @@ public class Fighter : SubAI
 
     IEnumerator BigAttack()
     {
-        GameManager.instance.character1QCoolTime = 0.0f;
-
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
@@ -385,8 +389,6 @@ public class Fighter : SubAI
 
     IEnumerator StraightAttack()
     {
-        GameManager.instance.character1WCoolTime = 0.0f;
-
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 

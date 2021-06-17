@@ -28,9 +28,9 @@ public class Soldier : SubAI
     public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
 
-    public float dodgeCoolTime = 3.0f;
-    public float qSkillCoolTime = 7.0f;
-    public float wSkillCoolTime = 4.0f;
+    public float dodgeCoolTime = 7.0f;
+    public float qSkillCoolTime = 13.0f;
+    public float wSkillCoolTime = 6.0f;
 
     bool onDodge;
     bool onQSkill;
@@ -77,6 +77,10 @@ public class Soldier : SubAI
 
         doingDodge = false;
 
+        UIManager.instance.character2DodgeCoolDown.fillAmount = 0;
+        UIManager.instance.character2QSkillCoolDown.fillAmount = 0;
+        UIManager.instance.character2WSkillCoolDown.fillAmount = 0;
+
         StartCoroutine(DrawAssaultRifle());
     }
 
@@ -102,11 +106,9 @@ public class Soldier : SubAI
             {
                 Q_Skill();
                 W_Skill();
-                E_Skill();
             }
             Stop();
             AttackRange();
-            CoolTime();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -151,6 +153,7 @@ public class Soldier : SubAI
                 curFireDelay = 1f;
             }
         }
+        CoolTime();
         Tag();
     }
     void Move()
@@ -235,41 +238,14 @@ public class Soldier : SubAI
             attackRange.SetActive(false);
         }
     }
-    void CoolTime()
-    {
-        if (GameManager.instance.character2DodgeCoolTime < dodgeCoolTime)
-        {
-            GameManager.instance.character2DodgeCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onDodge = true;
-        }
 
-        if (GameManager.instance.character2QCoolTime < qSkillCoolTime)
-        {
-            GameManager.instance.character2QCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onQSkill = true;
-        }
-
-        if (GameManager.instance.character2WCoolTime < wSkillCoolTime)
-        {
-            GameManager.instance.character2WCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onWSkill = true;
-        }
-    }
     void Q_Skill()
     {
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            UIManager.instance.character2QSkillCoolDown.fillAmount = 1;
+
             onQSkill = false;
-            GameManager.instance.character2QCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -284,8 +260,9 @@ public class Soldier : SubAI
     {
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            UIManager.instance.character2WSkillCoolDown.fillAmount = 1;
+
             onWSkill = false;
-            GameManager.instance.character2WCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -296,11 +273,39 @@ public class Soldier : SubAI
             StartCoroutine(ShootGrenade());
         }
     }
-    void E_Skill()
+    void CoolTime()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!onDodge)
         {
+            UIManager.instance.character2DodgeCoolDown.fillAmount -= 1 / dodgeCoolTime * Time.deltaTime;
 
+            if (UIManager.instance.character2DodgeCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character2DodgeCoolDown.fillAmount = 0;
+                onDodge = true;
+            }
+        }
+
+        if (!onQSkill)
+        {
+            UIManager.instance.character2QSkillCoolDown.fillAmount -= 1 / qSkillCoolTime * Time.deltaTime;
+
+            if (UIManager.instance.character2QSkillCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character2QSkillCoolDown.fillAmount = 0;
+                onQSkill = true;
+            }
+        }
+
+        if (!onWSkill)
+        {
+            UIManager.instance.character2WSkillCoolDown.fillAmount -= 1 / wSkillCoolTime * Time.deltaTime;
+
+            if (UIManager.instance.character2WSkillCoolDown.fillAmount <= 0)
+            {
+                UIManager.instance.character2WSkillCoolDown.fillAmount = 0;
+                onWSkill = true;
+            }
         }
     }
 
@@ -313,13 +318,14 @@ public class Soldier : SubAI
     }
     IEnumerator dodge()
     {
+        UIManager.instance.character2DodgeCoolDown.fillAmount = 1;
+
         //0.9sec
         canMove = false;
         canAttack = false;
         canSkill = false;
         onDodge = false;
 
-        GameManager.instance.character2DodgeCoolTime = 0.0f;
         anim.SetTrigger("Dodge");
         doingDodge = true;
         moveSpeed = 8.0f;

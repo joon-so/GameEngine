@@ -22,12 +22,9 @@ public class GameManager : MonoBehaviour
     public GameObject mainPlayerMark;
     public GameObject subPlayerMark;
 
-    public float character1DodgeCoolTime;
-    public float character1QCoolTime;
-    public float character1WCoolTime;
-    public float character2DodgeCoolTime;
-    public float character2QCoolTime;
-    public float character2WCoolTime;
+    public bool onDodge;
+    public bool onQSkill;
+    public bool onWSkill;
 
     void Awake()
     {
@@ -48,10 +45,9 @@ public class GameManager : MonoBehaviour
         character2Hp = character2MaxHp;
         character2Ep = character2MaxEp;
 
-        character1QCoolTime = 0;
-        character1WCoolTime = 0;
-        character2QCoolTime = 0;
-        character2WCoolTime = 0;
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
     }
 
     public void Tag1()
