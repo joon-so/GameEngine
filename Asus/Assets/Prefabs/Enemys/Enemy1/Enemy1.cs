@@ -129,6 +129,20 @@ public class Enemy1 : MonoBehaviour
         currentHp -= Soldier.wSkillDamage;
         hpBar.SetHp(currentHp);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "FighterAttack")
+        {
+            currentHp -= Fighter.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+
+        if (other.gameObject.tag == "FighterWSkill")
+        {
+            currentHp -= Fighter.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {

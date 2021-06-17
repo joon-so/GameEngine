@@ -44080,6 +44080,7 @@ GameObject:
   - component: {fileID: 1694177453792739559}
   - component: {fileID: 8940800194763695794}
   - component: {fileID: 2363121487396167550}
+  - component: {fileID: 2601324920985588183}
   m_Layer: 0
   m_Name: WSkill
   m_TagString: Untagged
@@ -49005,6 +49006,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &2601324920985588183
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635901805046715680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4635901805046715681
 GameObject:
   m_ObjectHideFlags: 0
@@ -49016,6 +49031,7 @@ GameObject:
   - component: {fileID: 483238250853965446}
   - component: {fileID: 4089144651606397789}
   - component: {fileID: 1932355907238349447}
+  - component: {fileID: 847826368073268801}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: Untagged
@@ -53889,6 +53905,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &847826368073268801
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635901805046715681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4635901805046715683
 GameObject:
   m_ObjectHideFlags: 0
@@ -53901,6 +53931,7 @@ GameObject:
   - component: {fileID: 7135055525451172240}
   - component: {fileID: 2401073195146891475}
   - component: {fileID: 4127968182380661632}
+  - component: {fileID: 1647608171762313410}
   m_Layer: 0
   m_Name: WSkill
   m_TagString: Untagged
@@ -58826,6 +58857,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &1647608171762313410
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635901805046715683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4635901805046715694
 GameObject:
   m_ObjectHideFlags: 0
@@ -58837,13 +58882,14 @@ GameObject:
   - component: {fileID: 845867623374450885}
   - component: {fileID: 3937390163688239655}
   - component: {fileID: 4800366577842203062}
+  - component: {fileID: 6628337720273303121}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &845867623374450885
 Transform:
   m_ObjectHideFlags: 0
@@ -63710,6 +63756,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &6628337720273303121
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635901805046715694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4695125588594022508
 GameObject:
   m_ObjectHideFlags: 0

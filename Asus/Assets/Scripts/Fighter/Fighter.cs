@@ -21,7 +21,7 @@ public class Fighter : SubAI
     public float qSkillCoolTime = 12.0f;
     public float wSkillCoolTime = 10.0f;
 
-    public static int attackDamage = 20;
+    public static int attackDamage = 10;
     public static int qSkillDamage = 60;
     public static int wSkillDamage = 10;
 
