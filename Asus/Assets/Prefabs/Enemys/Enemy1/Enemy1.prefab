@@ -638,6 +638,7 @@ MonoBehaviour:
   shootDistance: 10
   bullet: {fileID: 4695152754602416981, guid: 5815def86e4b207468bdb90518f4f5fa, type: 3}
   bulletPos: {fileID: 4765264332866735928}
+  deadSound: {fileID: 8300000, guid: dcbed8cc351849e408deb6c287552fd8, type: 3}
   shootCooltime: 3
   spinSpeed: 50
   maxHp: 200

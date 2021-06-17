@@ -7,6 +7,7 @@ public class Grenade : MonoBehaviour
     public GameObject msehObj;
     public GameObject effectObj;
     public Rigidbody rigid;
+    public AudioClip clip;
 
     public int damage = 70;
 
@@ -22,6 +23,7 @@ public class Grenade : MonoBehaviour
 
         effectObj.SetActive(true);
         msehObj.SetActive(false);
+        SoundManager.instance.SFXPlay("WSkillEffect", clip);
 
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);

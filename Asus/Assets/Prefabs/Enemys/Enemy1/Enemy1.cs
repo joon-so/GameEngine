@@ -9,6 +9,7 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] [Range(1f, 30f)] float shootDistance = 10f;
     [SerializeField] GameObject bullet = null;
     [SerializeField] Transform bulletPos;
+    [SerializeField] AudioClip deadSound;
 
     public float shootCooltime = 3.0f;
     public float spinSpeed = 50.0f;
@@ -95,6 +96,7 @@ public class Enemy1 : MonoBehaviour
 
             if (currentHp <= 0)
             {
+                SoundManager.instance.SFXPlay("Explosion", deadSound);
                 //movable = false;
                 shootable = false;
                 GetComponent<TriangleExplosion>().ExplosionMesh();

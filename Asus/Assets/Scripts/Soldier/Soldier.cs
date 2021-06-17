@@ -58,6 +58,11 @@ public class Soldier : SubAI
 
     float distanceWithPlayer;
 
+
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip qSkillClip;
+    [SerializeField] AudioClip wSkillClip;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -224,6 +229,8 @@ public class Soldier : SubAI
                     transform.LookAt(transform.position + nextVec);
                 }
 
+                SoundManager.instance.SFXPlay("Attack", attackClip);
+
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
                 bulletRigid.velocity = assaultRifleBulletPos.forward;
@@ -383,6 +390,8 @@ public class Soldier : SubAI
             anim.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
+            SoundManager.instance.SFXPlay("Attack", qSkillClip);
+
             yield return new WaitForSeconds(1.0f);
             anim.SetBool("AimMissile", false);
             missileEffect.SetActive(false);
@@ -421,6 +430,8 @@ public class Soldier : SubAI
 
             transform.LookAt(transform.position + nextVec);
             nextVec.y = 5;
+
+            SoundManager.instance.SFXPlay("Grenade", wSkillClip);
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
             rigidGrenade.AddForce(nextVec, ForceMode.Impulse);

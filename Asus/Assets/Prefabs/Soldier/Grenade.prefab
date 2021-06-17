@@ -34111,6 +34111,7 @@ MonoBehaviour:
   msehObj: {fileID: 9102141501624230628}
   effectObj: {fileID: 144469174521394530}
   rigid: {fileID: 2693192261589867135}
+  clip: {fileID: 8300000, guid: be26b44a09d40294a9c4ca638599cf6a, type: 3}
   damage: 70
 --- !u!1 &2891319751058613182
 GameObject:

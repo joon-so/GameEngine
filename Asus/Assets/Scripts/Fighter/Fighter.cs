@@ -48,6 +48,10 @@ public class Fighter : SubAI
 
     float distanceWithPlayer;
 
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip qSkillClip;
+    [SerializeField] AudioClip wSkillClip;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -245,6 +249,8 @@ public class Fighter : SubAI
             canMove = false;
             anim.SetBool("Run", canMove);
 
+            SoundManager.instance.SFXPlay("attack", attackClip);
+
             if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
                  && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
                  || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
@@ -375,6 +381,8 @@ public class Fighter : SubAI
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
+        SoundManager.instance.SFXPlay("QSkill", qSkillClip);
+
         anim.SetTrigger("QSkill");
         anim.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -404,6 +412,9 @@ public class Fighter : SubAI
         anim.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
         wRightEffect.SetActive(true);
+
+        SoundManager.instance.SFXPlay("WSkill", wSkillClip);
+
         yield return new WaitForSeconds(2.8f);
 
         wLeftEffect.SetActive(false);

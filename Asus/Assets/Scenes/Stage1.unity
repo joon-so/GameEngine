@@ -33787,6 +33787,18 @@ PrefabInstance:
       value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: attackClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6be490224c625aa45a4d0d8938bdb6e2, type: 3}
+    - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: qSkillClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4abc8d551b1c99141b6521f969dc946f, type: 3}
+    - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
+      propertyPath: wSkillClip
+      value: 
+      objectReference: {fileID: 8300000, guid: be26b44a09d40294a9c4ca638599cf6a, type: 3}
+    - target: {fileID: 7022995767700299694, guid: 4efdfe150f849924eb3c4c194ad8b25f, type: 3}
       propertyPath: tagCharacter
       value: 
       objectReference: {fileID: 2032381526}
