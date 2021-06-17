@@ -29,6 +29,7 @@ public class Fighter : SubAI
     bool canDodge;
     bool canAttack;
     bool canSkill;
+    bool speedUp;
 
     public static bool onDodge;
     bool onQSkill;
@@ -61,6 +62,7 @@ public class Fighter : SubAI
         onDodge = true;
         onQSkill = true;
         onWSkill = true;
+        speedUp = false;
 
         doingAttack = false;
         motionEndCheck = true;
@@ -130,13 +132,21 @@ public class Fighter : SubAI
         }
         CoolTime();
         Tag();
+        SpeedUp();
     }
 
     void Move()
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            if (!speedUp)
+            {
+                moveSpeed = 5.0f;
+            }
+            else
+            {
+                moveSpeed = 10.0f;
+            }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -167,7 +177,6 @@ public class Fighter : SubAI
             anim.SetBool("Run", false);
         }
     }
-
     void Dodge()
     {
         if (Input.GetKeyDown(KeyCode.Space) && onDodge)
@@ -429,7 +438,6 @@ public class Fighter : SubAI
         //    anim.SetBool("isRun", isRun);
         //}
     }
-
     void Tag()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -440,5 +448,27 @@ public class Fighter : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            if (GameManager.instance.character1Hp > 0)
+                GameManager.instance.character1Hp -= Enemy1.damage;
+        }
+    }
+
+    void SpeedUp()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (!speedUp)
+            {
+                speedUp = true;
+                nav.speed *= 2;
+            }
+            else
+            {
+                speedUp = false;
+                nav.speed /= 2;
+            }
+        }
     }
 }

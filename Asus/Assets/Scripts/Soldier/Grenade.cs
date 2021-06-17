@@ -16,7 +16,6 @@ public class Grenade : MonoBehaviour
     }
     IEnumerator Explosion()
     {
-
         yield return new WaitForSeconds(3.0f);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
@@ -29,7 +28,7 @@ public class Grenade : MonoBehaviour
         RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
         foreach (RaycastHit hitObj in rayHits)
         {
-            
+            hitObj.transform.GetComponent<Enemy1>().HitJadeGrenade();
         }
     }
 }

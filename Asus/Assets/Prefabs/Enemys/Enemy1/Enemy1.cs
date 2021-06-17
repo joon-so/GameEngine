@@ -24,18 +24,25 @@ public class Enemy1 : MonoBehaviour
     Vector3 startPoint;
     Rigidbody rigid;
 
+    protected List<GameObject> targets;
+
     public int maxHp = 200;
     public int currentHp;
+    public static int damage = 10;
+    public HpBar hpBar;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
 
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
+
         //InvokeRepeating("Find", 0f, 0.5f);
         startPoint = transform.position;
 
         currentHp = maxHp;
+        hpBar.SetMaxHp(maxHp);
     }
 
     // Update is called once per frame
@@ -88,7 +95,10 @@ public class Enemy1 : MonoBehaviour
 
             if (currentHp <= 0)
             {
+                //movable = false;
+                shootable = false;
                 GetComponent<TriangleExplosion>().ExplosionMesh();
+                targets.Remove(gameObject);
             }
         }
     }
@@ -107,5 +117,45 @@ public class Enemy1 : MonoBehaviour
         //쿨타임 지난 후 
         yield return new WaitForSeconds(shootCooltime);
         shootable = true;
+    }
+
+    public void HitJadeGrenade()
+    {
+        currentHp -= Soldier.wSkillDamage;
+        hpBar.SetHp(currentHp);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "FighterAttack")
+        {
+            currentHp -= Fighter.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "FighterQSkill")
+        {
+            currentHp -= Fighter.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "FighterWSkill")
+        {
+            currentHp -= Fighter.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "SoldierAttack")
+        {
+            currentHp -= Soldier.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "SoldierQSkill")
+        {
+            currentHp -= Soldier.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "SoldierWSkill")
+        {
+            currentHp -= Soldier.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
     }
 }
