@@ -113,4 +113,24 @@ public class UIManager : MonoBehaviour
             isTag = true;
         }
     }
+
+    //void C1_QSkillCoolDownUI()
+    //{
+    //    if (Input.GetKey(KeyCode.Q) && c1_QSkillCoolDown == false)
+    //    {
+    //        c1_QSkillCoolDown = true;
+    //        c1_QSkillImg.fillAmount = 1;
+    //    }
+
+    //    if (c1_QSkillCoolDown)
+    //    {
+    //        c1_QSkillImg.fillAmount -= 1 / c1_QSkillcoolDown * Time.deltaTime;
+
+    //        if (c1_QSkillImg.fillAmount <= 0)
+    //        {
+    //            c1_QSkillImg.fillAmount = 0;
+    //            c1_QSkillCoolDown = false;
+    //        }
+    //    }
+    //}
 }

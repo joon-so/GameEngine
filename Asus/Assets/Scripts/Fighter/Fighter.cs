@@ -21,13 +21,10 @@ public class Fighter : SubAI
     public static float qSkillCoolTime = 5.0f;
     public static float wSkillCoolTime = 5.0f;
     public static float eSkillCoolTime = 5.0f;
+
     public static int attackDamage = 20;
     public static int qSkillDamage = 60;
     public static int wSkillDamage = 10;
-
-    float curDodgeCoolTime;
-    float curQSkillCoolTime;
-    float curWSkillCoolTime;
 
     bool canMove;
     bool canDodge;
@@ -55,10 +52,6 @@ public class Fighter : SubAI
     {
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
-
-        curDodgeCoolTime = 0;
-        curQSkillCoolTime = 0;
-        curWSkillCoolTime = 0;
 
         canMove = false;
         canDodge = false;
@@ -182,7 +175,7 @@ public class Fighter : SubAI
             canMove = false;
             canSkill = false;
 
-            curDodgeCoolTime = 0.0f;
+            GameManager.instance.character1DodgeCoolTime = 0.0f;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -272,9 +265,9 @@ public class Fighter : SubAI
 
     void CoolTime()
     {
-        if (curDodgeCoolTime < dodgeCoolTime)
+        if (GameManager.instance.character1DodgeCoolTime < dodgeCoolTime)
         {
-            curDodgeCoolTime += Time.deltaTime;
+            GameManager.instance.character1DodgeCoolTime += Time.deltaTime;
         }
         else
         {
@@ -305,7 +298,7 @@ public class Fighter : SubAI
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
             onQSkill = false;
-            curQSkillCoolTime = 0;
+            GameManager.instance.character1QCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -322,7 +315,7 @@ public class Fighter : SubAI
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
             onWSkill = false;
-            curWSkillCoolTime = 0;
+            GameManager.instance.character1WCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
