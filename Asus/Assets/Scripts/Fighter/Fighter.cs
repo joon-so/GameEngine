@@ -64,6 +64,7 @@ public class Fighter : SubAI
         canDodge = false;
         canAttack = false;
         canSkill = false;
+        FindEnemys();
 
         onDodge = true;
         onQSkill = true;
@@ -74,7 +75,6 @@ public class Fighter : SubAI
         comboContinue = true;
 
         StartCoroutine(StartMotion());
-        FindEnemys();
     }
 
     void Update()

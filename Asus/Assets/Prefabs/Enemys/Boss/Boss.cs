@@ -9,6 +9,7 @@ public class Boss : MonoBehaviour
     [SerializeField] [Range(10f, 30f)] float detectDistance = 15f;
     [SerializeField] [Range(10f, 20f)] float shootDistance = 10f;
     [SerializeField] GameObject bullet = null;
+    [SerializeField] GameObject dropEffect = null;
     [SerializeField] Transform bulletLeftStartPoint;
     [SerializeField] Transform bulletRightStartPoint;
 
@@ -18,12 +19,14 @@ public class Boss : MonoBehaviour
 
     bool shootable = true;
     bool movable = true;
-    bool alive = true;
+    bool born = false;
+    bool drop = false;
 
     float playerDistance;
     GameObject mainCharacter;
     Animator anim;
     NavMeshAgent nav;
+    Rigidbody rigid;
     Vector3 startPoint;
 
     public int maxHp = 200;
@@ -34,9 +37,12 @@ public class Boss : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
+        rigid = GetComponent<Rigidbody>();
 
-        //InvokeRepeating("Find", 0f, 0.5f);
+        transform.position = new Vector3(transform.position.x, 45f, transform.position.z);
         startPoint = transform.position;
+        rigid.useGravity = false;
+        nav.enabled = false;
 
         currentHp = maxHp;
     }
@@ -45,10 +51,14 @@ public class Boss : MonoBehaviour
     void FixedUpdate()
     {
         mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
-
+      
         if (mainCharacter == null)
         {
             return;
+        }
+        if(!born)
+        {
+            Waiting();
         }
         else
         {
@@ -95,6 +105,20 @@ public class Boss : MonoBehaviour
             }
         }
     }
+    void Waiting()
+    {
+        mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+
+        playerDistance = Vector3.Distance(
+            new Vector3(mainCharacter.transform.position.x, 0, mainCharacter.transform.position.z),
+            new Vector3(transform.position.x, 0, transform.position.z));
+
+        if (playerDistance < spownDistance && !drop)
+        {
+            drop = true;
+            StartCoroutine(DropAndExplosion());
+        }
+    }
     IEnumerator Attack()
     {
         // ÃÑ¾Ë »ý¼º
@@ -112,6 +136,18 @@ public class Boss : MonoBehaviour
         //ÄðÅ¸ÀÓ
         movable = true;
         yield return new WaitForSeconds(shootCooltime);
+        shootable = true;
+    }
+    IEnumerator DropAndExplosion()
+    {
+        rigid.useGravity = true;
+        yield return new WaitForSeconds(3f);
+        Instantiate(dropEffect, transform.position, transform.rotation);
+        this.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        nav.enabled = true;
+        born = true;
+        movable = true;
+        yield return new WaitForSeconds(1.9f);
         shootable = true;
     }
 }
