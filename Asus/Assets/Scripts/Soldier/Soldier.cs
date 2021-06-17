@@ -32,6 +32,10 @@ public class Soldier : SubAI
     public float qSkillCoolTime = 13.0f;
     public float wSkillCoolTime = 6.0f;
 
+    public static int attackDamage = 30;
+    public static int qSkillDamage = 80;
+    public static int wSkillDamage = 40;
+
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
@@ -431,5 +435,10 @@ public class Soldier : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            if (GameManager.instance.character1Hp > 0)
+                GameManager.instance.character1Hp -= Enemy1.damage;
+        }
     }
 }

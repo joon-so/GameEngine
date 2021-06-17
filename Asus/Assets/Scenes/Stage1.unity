@@ -5370,6 +5370,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7583219307138883968, guid: 234080c7f240c864b8c97819856bdff0, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8643170453513689311, guid: 234080c7f240c864b8c97819856bdff0, type: 3}
       propertyPath: m_Speed
       value: 2
@@ -46292,6 +46296,22 @@ PrefabInstance:
     - target: {fileID: 4635901804926055087, guid: e41a6887958c93649903f467ecc80545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635901805046715680, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: m_TagString
+      value: FighterWSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635901805046715681, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: m_TagString
+      value: FighterAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635901805046715683, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: m_TagString
+      value: FighterWSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635901805046715694, guid: e41a6887958c93649903f467ecc80545, type: 3}
+      propertyPath: m_TagString
+      value: FighterAttack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e41a6887958c93649903f467ecc80545, type: 3}

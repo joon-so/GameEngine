@@ -440,5 +440,10 @@ public class Fighter : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            if (GameManager.instance.character1Hp > 0)
+                GameManager.instance.character1Hp -= Enemy1.damage;
+        }
     }
 }

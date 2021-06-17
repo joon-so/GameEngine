@@ -6,6 +6,14 @@ TagManager:
   tags:
   - MainCharacter
   - SubCharacter
+  - Enemy
+  - Enemy1Bullet
+  - FighterAttack
+  - FighterQSkill
+  - FighterWSkill
+  - SoldierAttack
+  - SoldierQSkill
+  - SoldierWSkill
   layers:
   - Default
   - TransparentFX

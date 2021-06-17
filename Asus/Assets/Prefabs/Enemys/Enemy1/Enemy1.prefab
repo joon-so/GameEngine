@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 6175160082467517231}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,6 +416,7 @@ MonoBehaviour:
   spinSpeed: 50
   maxHp: 200
   currentHp: 0
+  hpBar: {fileID: 4264364899679584176}
 --- !u!1 &7583219307138883976
 GameObject:
   m_ObjectHideFlags: 0
