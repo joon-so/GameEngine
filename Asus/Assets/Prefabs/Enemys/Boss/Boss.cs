@@ -13,6 +13,9 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform bulletLeftStartPoint;
     [SerializeField] Transform bulletRightStartPoint;
 
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip deadSound;
+
     float straightTime = 0.2f;
     public float shootCooltime = 3.0f;
     public float spinSpeed = 50.0f;
@@ -107,6 +110,8 @@ public class Boss : MonoBehaviour
             if (currentHp <= 0)
             {
                 //movable = false;
+                SoundManager.instance.SFXPlay("Explosion", deadSound);
+
                 shootable = false;
                 GetComponent<TriangleExplosion>().ExplosionMesh();
                 targets.Remove(gameObject);
@@ -130,16 +135,20 @@ public class Boss : MonoBehaviour
     IEnumerator Attack()
     {
         // ÃÑ¾Ë »ý¼º
+        SoundManager.instance.SFXPlay("Explosion", attackSound);
         Instantiate(bullet, bulletLeftStartPoint.position, bulletLeftStartPoint.rotation);
         movable = false;
         shootable = false;
         //anim.SetBool("isAttack", true);
         //ÁÂ¿ì 2¹ß
         yield return new WaitForSeconds(straightTime);
+        SoundManager.instance.SFXPlay("Explosion", attackSound);
         Instantiate(bullet, bulletRightStartPoint.position, bulletRightStartPoint.rotation);
         yield return new WaitForSeconds(straightTime);
+        SoundManager.instance.SFXPlay("Explosion", attackSound);
         Instantiate(bullet, bulletLeftStartPoint.position, bulletLeftStartPoint.rotation);
         yield return new WaitForSeconds(straightTime);
+        SoundManager.instance.SFXPlay("Explosion", attackSound);
         Instantiate(bullet, bulletRightStartPoint.position, bulletRightStartPoint.rotation);
         //ÄðÅ¸ÀÓ
         movable = true;

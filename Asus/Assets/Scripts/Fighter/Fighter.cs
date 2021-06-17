@@ -49,6 +49,7 @@ public class Fighter : SubAI
     float distanceWithPlayer;
 
     [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip dodgeClip;
     [SerializeField] AudioClip qSkillClip;
     [SerializeField] AudioClip wSkillClip;
 
@@ -186,6 +187,7 @@ public class Fighter : SubAI
         if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
             UIManager.instance.character1DodgeCoolDown.fillAmount = 1;
+            SoundManager.instance.SFXPlay("dodge", dodgeClip);
 
             onDodge = false;
 

@@ -1,5 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 7bcb8c55d25e96f4c8e3b91dae527065
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: f8cfe66d68089d64d9982d34ade3db3a
+=======
+guid: 7bcb8c55d25e96f4c8e3b91dae527065
+>>>>>>> 3f355c02e9fc1ba688e0a2603408ab234001ef0c
+=======
+guid: 7bcb8c55d25e96f4c8e3b91dae527065
+>>>>>>> 3f355c02e9fc1ba688e0a2603408ab234001ef0c
+>>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,12 +44,33 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+=======
+=======
+>>>>>>> 3f355c02e9fc1ba688e0a2603408ab234001ef0c
+>>>>>>> Stashed changes
     filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: -1
     wrapV: -1
     wrapW: -1
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> 3f355c02e9fc1ba688e0a2603408ab234001ef0c
+=======
+>>>>>>> 3f355c02e9fc1ba688e0a2603408ab234001ef0c
+>>>>>>> Stashed changes
   nPOTScale: 1
   lightmap: 0
   compressionQuality: 50

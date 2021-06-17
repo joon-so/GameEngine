@@ -9,6 +9,7 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] [Range(1f, 30f)] float shootDistance = 10f;
     [SerializeField] GameObject bullet = null;
     [SerializeField] Transform bulletPos;
+    [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deadSound;
 
     public float shootCooltime = 3.0f;
@@ -109,10 +110,12 @@ public class Enemy1 : MonoBehaviour
     {
         // 총알 생성
         Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+        SoundManager.instance.SFXPlay("attack", attackSound);
         movable = false;
         shootable = false;
         anim.SetBool("isAttack", true);
         yield return new WaitForSeconds(0.2f);
+        SoundManager.instance.SFXPlay("attack", attackSound);
         Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         //발사시간 대기
         movable = true;

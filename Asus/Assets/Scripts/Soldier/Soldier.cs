@@ -60,6 +60,7 @@ public class Soldier : SubAI
 
 
     [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip dodgeClip;
     [SerializeField] AudioClip qSkillClip;
     [SerializeField] AudioClip wSkillClip;
 
@@ -339,6 +340,7 @@ public class Soldier : SubAI
     IEnumerator dodge()
     {
         UIManager.instance.character2DodgeCoolDown.fillAmount = 1;
+        SoundManager.instance.SFXPlay("dodge", dodgeClip);
 
         //0.9sec
         canMove = false;

@@ -44027,6 +44027,7 @@ MonoBehaviour:
   qSkillCoolTime: 12
   wSkillCoolTime: 10
   attackClip: {fileID: 8300000, guid: 73a85fcc396b1894196d3406987ceed4, type: 3}
+  dodgeClip: {fileID: 8300000, guid: 1c72d6e2f7f12ec458e4f29aaef510c9, type: 3}
   qSkillClip: {fileID: 8300000, guid: 49a2fa99e6e904c4aabbce61beaa32da, type: 3}
   wSkillClip: {fileID: 8300000, guid: 899e78cea3fb21448a82470d01a13398, type: 3}
 --- !u!54 &4635901804926055085

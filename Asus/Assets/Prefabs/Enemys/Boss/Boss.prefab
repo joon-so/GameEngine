@@ -2655,6 +2655,8 @@ MonoBehaviour:
   dropEffect: {fileID: 1411588298947990, guid: 8d2b80a991da9884d84f23d766782188, type: 3}
   bulletLeftStartPoint: {fileID: 6403874963261258048}
   bulletRightStartPoint: {fileID: 6403874964874285032}
+  attackSound: {fileID: 8300000, guid: 998a2a8a2bd68e542893dce669aa417f, type: 3}
+  deadSound: {fileID: 8300000, guid: dcbed8cc351849e408deb6c287552fd8, type: 3}
   shootCooltime: 3
   spinSpeed: 50
   maxHp: 600
