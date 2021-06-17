@@ -44,6 +44,7 @@ public class Soldier : SubAI
     bool canAttack;
     bool canDodge;
     bool canSkill;
+    bool speedUp;
 
     float curFireDelay;
 
@@ -78,7 +79,7 @@ public class Soldier : SubAI
         canMove = false;
         canDodge = false;
         canSkill = false;
-
+        speedUp = false;
         doingDodge = false;
 
         UIManager.instance.character2DodgeCoolDown.fillAmount = 0;
@@ -159,12 +160,20 @@ public class Soldier : SubAI
         }
         CoolTime();
         Tag();
+        SpeedUp();
     }
     void Move()
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            if (!speedUp)
+            {
+                moveSpeed = 5.0f;
+            }
+            else
+            {
+                moveSpeed = 10.0f;
+            }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -439,6 +448,23 @@ public class Soldier : SubAI
         {
             if (GameManager.instance.character1Hp > 0)
                 GameManager.instance.character1Hp -= Enemy1.damage;
+        }
+    }
+
+    void SpeedUp()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (!speedUp)
+            {
+                speedUp = true;
+                nav.speed *= 2;
+            }
+            else
+            {
+                speedUp = false;
+                nav.speed /= 2;
+            }
         }
     }
 }

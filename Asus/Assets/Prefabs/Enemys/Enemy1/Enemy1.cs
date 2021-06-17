@@ -24,6 +24,8 @@ public class Enemy1 : MonoBehaviour
     Vector3 startPoint;
     Rigidbody rigid;
 
+    protected List<GameObject> targets;
+
     public int maxHp = 200;
     public int currentHp;
     public static int damage = 10;
@@ -33,6 +35,8 @@ public class Enemy1 : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
+
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
 
         //InvokeRepeating("Find", 0f, 0.5f);
         startPoint = transform.position;
@@ -90,7 +94,10 @@ public class Enemy1 : MonoBehaviour
 
             if (currentHp <= 0)
             {
+                //movable = false;
+                shootable = false;
                 GetComponent<TriangleExplosion>().ExplosionMesh();
+                targets.Remove(gameObject);
             }
         }
     }
