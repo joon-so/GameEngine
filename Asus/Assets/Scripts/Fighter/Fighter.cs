@@ -13,6 +13,8 @@ public class Fighter : SubAI
     public float dodgeCoolTime = 5.0f;
     float curDodgeCoolTime = 0;
 
+    float curFireDelay = 1.0f;
+    public float subFireDelay = 1.5f;
     bool doAttack = false;
     bool motionEndCheck = true;
     bool comboContinue = true;
@@ -86,19 +88,40 @@ public class Fighter : SubAI
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
+            curFireDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace();
+                anim.SetBool("Run", true);
+                curFireDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
                 SubAttack();
+
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    moveSpeed = 0f;
+                    anim.SetBool("Run", false);
+                    anim.SetTrigger("Throwing");
+                    vecTarget = transform.position;
+
+                    curFireDelay = 0;
+                }
             }
             else if (currentState == characterState.idle)
             {
                 Idle();
+                anim.SetBool("Run", false);
+                curFireDelay = 1f;
             }
         }
         Tag();
