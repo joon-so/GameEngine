@@ -38,6 +38,7 @@ public class Enemy1 : MonoBehaviour
         startPoint = transform.position;
 
         currentHp = maxHp;
+        hpBar.SetMaxHp(maxHp);
     }
 
     // Update is called once per frame
@@ -109,6 +110,12 @@ public class Enemy1 : MonoBehaviour
         //쿨타임 지난 후 
         yield return new WaitForSeconds(shootCooltime);
         shootable = true;
+    }
+
+    public void HitJadeGrenade()
+    {
+        currentHp -= Soldier.wSkillDamage;
+        hpBar.SetHp(currentHp);
     }
 
     void OnCollisionEnter(Collision collision)
