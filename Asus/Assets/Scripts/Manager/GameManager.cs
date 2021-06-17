@@ -22,8 +22,10 @@ public class GameManager : MonoBehaviour
     public GameObject mainPlayerMark;
     public GameObject subPlayerMark;
 
+    public float character1DodgeCoolTime;
     public float character1QCoolTime;
     public float character1WCoolTime;
+    public float character2DodgeCoolTime;
     public float character2QCoolTime;
     public float character2WCoolTime;
 

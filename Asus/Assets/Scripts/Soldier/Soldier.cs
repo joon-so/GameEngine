@@ -29,12 +29,8 @@ public class Soldier : SubAI
     public float followDistance = 5.0f;
 
     public float dodgeCoolTime = 3.0f;
-    float curDodgeCoolTime = 0;
-
-    public float qskillCoolTime = 7.0f;
-    float curQSkillCoolTime = 0;
-    public float wskillCoolTime = 4.0f;
-    float curWSkillCoolTime = 0;
+    public float qSkillCoolTime = 7.0f;
+    public float wSkillCoolTime = 4.0f;
 
     bool onDodge;
     bool onQSkill;
@@ -81,8 +77,6 @@ public class Soldier : SubAI
 
         doingDodge = false;
 
-
-        curDodgeCoolTime = dodgeCoolTime;
         StartCoroutine(DrawAssaultRifle());
     }
 
@@ -243,28 +237,27 @@ public class Soldier : SubAI
     }
     void CoolTime()
     {
-        // 회피
-        if (curDodgeCoolTime < dodgeCoolTime)
+        if (GameManager.instance.character2DodgeCoolTime < dodgeCoolTime)
         {
-            curDodgeCoolTime += Time.deltaTime;
+            GameManager.instance.character2DodgeCoolTime += Time.deltaTime;
         }
         else
         {
             onDodge = true;
         }
-        // Q스킬
-        if (curQSkillCoolTime < qskillCoolTime)
+
+        if (GameManager.instance.character2QCoolTime < qSkillCoolTime)
         {
-            curQSkillCoolTime += Time.deltaTime;
+            GameManager.instance.character2QCoolTime += Time.deltaTime;
         }
         else
         {
             onQSkill = true;
         }
-        // W스킬
-        if (curWSkillCoolTime < wskillCoolTime)
+
+        if (GameManager.instance.character2WCoolTime < wSkillCoolTime)
         {
-            curWSkillCoolTime += Time.deltaTime;
+            GameManager.instance.character2WCoolTime += Time.deltaTime;
         }
         else
         {
@@ -276,7 +269,7 @@ public class Soldier : SubAI
         if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
             onQSkill = false;
-            curQSkillCoolTime = 0;
+            GameManager.instance.character2QCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -292,7 +285,7 @@ public class Soldier : SubAI
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
             onWSkill = false;
-            curWSkillCoolTime = 0;
+            GameManager.instance.character2WCoolTime = 0;
             anim.SetBool("Run", false);
 
             canAttack = false;
@@ -326,7 +319,7 @@ public class Soldier : SubAI
         canSkill = false;
         onDodge = false;
 
-        curDodgeCoolTime = 0.0f;
+        GameManager.instance.character2DodgeCoolTime = 0.0f;
         anim.SetTrigger("Dodge");
         doingDodge = true;
         moveSpeed = 8.0f;
